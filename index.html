@@ -106,7 +106,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
   $scope.generate = function () {
     var zip = new JSZip();
     zip.file("generated-config.json", angular.toJson($scope.config));
-    zip.file("start.sh", "#!/usr/bin/env sh\n\ngit clone git@github.com:mess110/glassic.git\ncd glassic\ncp ../generated-config.json .\nnpm install\ngrunt compile\n");
+    zip.file("start.sh", "#!/usr/bin/env sh\n\ngit clone git@github.com:mess110/glassic.git\ncp generated-config.json glassic/config.json\ncd glassic\nnpm install\ngrunt compile\n");
     var content = zip.generate({type:"blob"});
     saveAs(content, $scope.config.name + "-glassic.zip");
 
