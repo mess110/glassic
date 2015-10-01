@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+
+npm install
+./node_modules/nw/bin/nw
