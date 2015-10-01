@@ -5,7 +5,7 @@
     <title>glassic</title>
 
     <!-- Angular Material CSS now available via Google CDN; version 0.11 used here -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.1/angular-material.min.css">
 
     <style type="text/css" media="all">
       html, body {
@@ -24,53 +24,55 @@
       <md-card>
         <md-card-content>
           <h2 class="md-title">glassic</h2>
-          <div layout="row" layout-sm="column" layout-wrap>
-            <md-content flex layout="column" layout-align="center center">
-              I want an application called
-            </md-content>
-            <md-input-container flex>
-              <label>name</label>
-              <input ng-model="config.name">
-            </md-input-container>
-            <md-content flex layout="column" layout-align="center center">
-              pointing to
-            </md-content>
-            <md-input-container flex>
-              <label>url</label>
-              <input type="url" ng-model="config.url">
-            </md-input-container>
-            <md-content layout="column" layout-align="center center">
-              .
-            </md-content>
-          </div>
-          <div layout="row" layout-sm="column" layout-wrap>
-            <div flex layout="column" layout-align="center center">
-              It should work on
+          <form name="myForm">
+            <div layout="row" layout-sm="column" layout-wrap>
+              <md-content flex layout="column" layout-align="center center">
+                I want an application called
+              </md-content>
+              <md-input-container flex>
+                <label>name</label>
+                <input ng-required ng-model="config.name" ng-minlength="2" ng-maxlength="30" ng-pattern="/^[0-9A-Za-z\-\_]*$/">
+              </md-input-container>
+              <md-content flex layout="column" layout-align="center center">
+                pointing to
+              </md-content>
+              <md-input-container flex>
+                <label>url</label>
+                <input ng-required type="url" ng-model="config.url">
+              </md-input-container>
+              <md-content layout="column" layout-align="center center">
+                .
+              </md-content>
             </div>
-            <div flex>
-              <md-checkbox ng-checked="android" ng-click="android = !android">
-                android
-              </md-checkbox>
+            <div layout="row" layout-sm="column" layout-wrap>
+              <div flex layout="column" layout-align="center center">
+                It should work on
+              </div>
+              <div flex>
+                <md-checkbox ng-checked="android" ng-click="android = !android">
+                  android
+                </md-checkbox>
+              </div>
+              <div flex>
+                <md-checkbox ng-checked="linux" ng-click="linux = !linux">
+                  linux
+                </md-checkbox>
+              </div>
+              <div flex>
+                <md-checkbox ng-checked="windows" ng-click="windows = !windows">
+                  windows
+                </md-checkbox>
+              </div>
+              <div flex>
+                <md-checkbox ng-checked="mac" ng-click="mac = !mac">
+                  mac
+                </md-checkbox>
+              </div>
             </div>
-            <div flex>
-              <md-checkbox ng-checked="linux" ng-click="linux = !linux">
-                linux
-              </md-checkbox>
-            </div>
-            <div flex>
-              <md-checkbox ng-checked="windows" ng-click="windows = !windows">
-                windows
-              </md-checkbox>
-            </div>
-            <div flex>
-              <md-checkbox ng-checked="mac" ng-click="mac = !mac">
-                mac
-              </md-checkbox>
-            </div>
-          </div>
+          </form>
         </md-card-content>
         <div class="md-actions" layout="row" layout-align="end center">
-          <md-button ng-click="generate()">Generate & Download</md-button>
+          <md-button ng-click="generate()" ng-disabled="!myForm.$valid">Generate & Download</md-button>
         </div>
       </md-card>
     </md-content>
@@ -82,7 +84,7 @@
 
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.11 used here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.1/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
 
@@ -90,7 +92,8 @@
       var app = angular.module('app', ['ngMaterial']);
 
 app.config(function($mdThemingProvider) {
-  $mdThemingProvider.theme('default');
+  $mdThemingProvider.theme('default')
+    .accentPalette('deep-purple');
 });
 
 app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
