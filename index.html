@@ -2,10 +2,16 @@
   <head>
     <meta name="viewport" content="initial-scale=1" />
 
-    <!-- Angular Material CSS now available via Google CDN; version 0.10 used here -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.css">
+    <title>glassic</title>
+
+    <!-- Angular Material CSS now available via Google CDN; version 0.11 used here -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.css">
 
     <style type="text/css" media="all">
+      html, body {
+        overflow: hidden;
+      }
+
       md-card {
         max-width: 1200px;
         margin-left: auto;
@@ -24,14 +30,14 @@
             </md-content>
             <md-input-container flex>
               <label>name</label>
-              <input ng-model="name">
+              <input ng-model="config.name">
             </md-input-container>
             <md-content flex layout="column" layout-align="center center">
               pointing to
             </md-content>
             <md-input-container flex>
               <label>url</label>
-              <input ng-model="url">
+              <input type="url" ng-model="config.url">
             </md-input-container>
             <md-content layout="column" layout-align="center center">
               .
@@ -64,7 +70,7 @@
           </div>
         </md-card-content>
         <div class="md-actions" layout="row" layout-align="end center">
-          <md-button>Generate</md-button>
+          <md-button ng-click="generate()">Generate & Download</md-button>
         </div>
       </md-card>
     </md-content>
@@ -75,8 +81,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular-aria.min.js"></script>
 
 
-    <!-- Angular Material Javascript now available via Google CDN; version 0.10 used here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.10.0/angular-material.min.js"></script>
+    <!-- Angular Material Javascript now available via Google CDN; version 0.11 used here -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.0/angular-material.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
 
     <script>
       var app = angular.module('app', ['ngMaterial']);
@@ -85,7 +93,25 @@ app.config(function($mdThemingProvider) {
   $mdThemingProvider.theme('default');
 });
 
-app.controller('AppCtrl', ['$scope', function($scope) {
+app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
+  $scope.config = {
+    name: 'CoolBeans',
+    url: 'https://cool-beans.com/'
+  };
+
+  showToast = function (s) {
+    $mdToast.show($mdToast.simple().content(s).position('bottom right').hideDelay(3000));
+  }
+
+  $scope.generate = function () {
+    var zip = new JSZip();
+    zip.file("generated-config.json", angular.toJson($scope.config));
+    zip.file("start.sh", "#!/usr/bin/env sh\n\ngit clone git@github.com:mess110/glassic.git\ncd glassic\ncp ../generated-config.json .\nnpm install\ngrunt compile\n");
+    var content = zip.generate({type:"blob"});
+    saveAs(content, $scope.config.name + "-glassic.zip");
+
+    showToast('App generated.');
+  };
 }]);
     </script>
   </body>
