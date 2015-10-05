@@ -4,7 +4,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.view.Window;
 import android.webkit.WebSettings;
@@ -16,24 +15,6 @@ import ro.northpole.music.webview.R;
 
 public class ShowWebView extends Activity {
 
-    private boolean haveNetworkConnection() {
-        boolean haveConnectedWifi = false;
-        boolean haveConnectedMobile = false;
-
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
-                    haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
-                    haveConnectedMobile = true;
-        }
-        return haveConnectedWifi || haveConnectedMobile;
-    }
-
     private WebView webView;
 
     public void onCreate(Bundle savedInstanceState) {
@@ -44,10 +25,11 @@ public class ShowWebView extends Activity {
         setContentView(R.layout.show_web_view);
 
         webView = (WebView) findViewById(R.id.webView1);
+        webView.setWebViewClient(new MyWebViewClient());
         if (haveNetworkConnection()) {
             startWebView("${url}");
         } else {
-            webView.loadUrl("file:///android_asset/error.html");
+            startWebView("file:///android_asset/error.html");
         }
     }
 
@@ -76,6 +58,12 @@ public class ShowWebView extends Activity {
         webView.loadUrl(url);
     }
 
+    private class MyWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            return false;
+        }
+    }
 
     @Override
     public void onBackPressed() {
@@ -84,6 +72,28 @@ public class ShowWebView extends Activity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI")) {
+                if (ni.isConnected()) {
+                    haveConnectedWifi = true;
+                }
+            }
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE")) {
+                if (ni.isConnected()) {
+                    haveConnectedMobile = true;
+                }
+            }
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
 }
