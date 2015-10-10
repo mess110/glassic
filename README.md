@@ -1,8 +1,6 @@
 # glassic
 
-Simple webview application generator.
-
-Can generate webview application for:
+Simple webview application generator for:
 
 * android
 * linux via nw.js
@@ -20,16 +18,25 @@ Developed with:
 
     npm install
 
+This will install dependencies, compile according to **config.json** and run
+the help command.
+
 ## Getting started
 
-[![asciicast](https://asciinema.org/a/0oklk3uct9gqfkan8dco8rfdq.png)](https://asciinema.org/a/0oklk3uct9gqfkan8dco8rfdq)
+TODO: asciinema
 
-All commands are triggered through grunt.
+Assuming you went through the installation step, you now have your apps.
+They can be found in the **templates/** folder.
 
-    grunt help
-    grunt compile
+Lets run the desktop app:
 
-Documentation and more info can be found [here](https://github.com/mess110/glassic/wiki/Home).
+    npm run demo:linux
+
+or build the android apk:
+
+    npm run demo:android
+
+[Documentation and more info can be found here](https://github.com/mess110/glassic/wiki/Home).
 
 ## License
 

@@ -1,9 +1,23 @@
 {
-  "name": "webview-wrapper",
+  "name": "glassic",
   "version": "1.0.0",
   "description": "Simple webview application generator",
   "scripts": {
-    "install": "grunt install"
+    "glassic": "npm install",
+    "install": "npm run update:submodules && npm run compile && npm run help",
+
+    "update:submodules": "git submodule foreach git pull origin master",
+
+    "compile": "./node_modules/coffee-script/bin/coffee libs/wrapper.coffee",
+    "compile:android": "cd templates/android; ./gradlew clean; ./gradlew build",
+
+    "help": "cat wiki/Help.md",
+    "help:android": "cat templates/android/README.md",
+    "help:desktop": "cat templates/desktop/README.md",
+    "help:apk": "ls templates/android/app/build/outputs/apk/",
+
+    "demo:android": "npm run compile:android; npm run help:apk",
+    "demo:linux": "cd templates/desktop; ./linux"
   },
   "repository": {
     "type": "git",
@@ -13,9 +27,6 @@
   "license": "LGPL-3.0",
   "homepage": "https://github.com/mess110/glassic",
   "devDependencies": {
-    "coffee-script": "^1.10.0",
-    "grunt": "^0.4.5",
-    "grunt-shell": "^1.1.2",
-    "grunt-update-submodules": "^0.4.1"
+    "coffee-script": "^1.10.0"
   }
 }
