@@ -1,30 +1,17 @@
-glassic commands
-----------------
+glassic
+-------
 
-    npm install
+Generates webview applications for android, ios, linux and windows.
 
-      - updates glassic
-      - installs dependencies
-      - compiles according to **config.json**
-      - prints help
+You get git repositories customized with your app name and url.
 
-    npm run help
-
-      - prints this help
+commands
+--------
 
     npm run glassic
 
-      - alias for npm install
-
     npm run demo:linux
-
-      - installs linux dependencies
-      - runs the application
-
     npm run demo:android
 
-      - installs android dependencies
-      - runs the clean task
-      - compiles the application
-      - prints android help
-
+    npm run help
+    npm run help:ios

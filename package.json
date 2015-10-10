@@ -15,6 +15,7 @@
     "help:android": "cat templates/android/README.md",
     "help:desktop": "cat templates/desktop/README.md",
     "help:apk": "ls templates/android/app/build/outputs/apk/",
+    "help:ios": "echo 'See templates/ios7/README.md for compiling instructions.'",
 
     "demo:android": "npm run compile:android; npm run help:apk",
     "demo:linux": "cd templates/desktop; ./linux"

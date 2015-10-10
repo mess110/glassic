@@ -9,6 +9,35 @@ Convert website into application for different platforms.
 - The templates will have several customizable parameters
 - The user will receive the source code to the application
 
+## Commands
+
+    npm install
+
+      - updates glassic
+      - installs dependencies
+      - compiles according to **config.json**
+      - prints help
+
+    npm run help
+
+      - prints this help
+
+    npm run glassic
+
+      - alias for npm install
+
+    npm run demo:linux
+
+      - installs linux dependencies
+      - runs the application
+
+    npm run demo:android
+
+      - installs android dependencies
+      - runs the clean task
+      - compiles the application
+      - prints android help
+
 ## TODO
 
 - config file format
