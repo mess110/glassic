@@ -2,14 +2,17 @@
   <head>
     <meta name="viewport" content="initial-scale=1" />
 
-    <title>glassic</title>
+    <title>glassic wizzard</title>
 
-    <!-- Angular Material CSS now available via Google CDN; version 0.11 used here -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.1/angular-material.min.css">
+    <!-- Angular Material CSS now available via Google CDN; version 0.12 used here -->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
 
     <style type="text/css" media="all">
       html, body {
-        overflow: hidden;
+      }
+
+      input[type=file] {
+        display: none;
       }
 
       md-card {
@@ -17,63 +20,136 @@
         margin-left: auto;
         margin-right: auto;
       }
+
+      md-input-container {
+        padding-bottom: 2px;
+      }
+
+      h2 span {
+        color: rgba(0,0,0,0.54);
+      }
     </style>
   </head>
   <body ng-controller="AppCtrl">
     <md-content class="md-padding">
       <md-card>
         <md-card-content>
-          <h2 class="md-title">glassic</h2>
+
+          <h2 class="md-title">glassic <span>wizzard</span></h2>
+
           <form name="myForm">
+
             <div layout="row" layout-sm="column" layout-wrap>
-              <md-content flex layout="column" layout-align="center center">
+              <md-content flex=30 layout="column" layout-align="center center">
                 I want an application called
               </md-content>
               <md-input-container flex>
                 <label>name</label>
-                <input ng-required ng-model="config.name" ng-minlength="2" ng-maxlength="30" ng-pattern="/^[0-9A-Za-z\-\_]*$/">
+                <input ng-required="true" ng-model="config.name" ng-minlength="2" ng-maxlength="30" ng-pattern="/^[0-9A-Za-z\-\_]*$/">
               </md-input-container>
-              <md-content flex layout="column" layout-align="center center">
+            </div>
+            <div layout="row" layout-sm="column" layout-wrap>
+              <md-content flex=30 layout="column" layout-align="center center">
                 pointing to
               </md-content>
               <md-input-container flex>
                 <label>url</label>
-                <input ng-required type="url" ng-model="config.url">
+                <input ng-required="true" type="url" ng-model="config.url">
               </md-input-container>
-              <md-content layout="column" layout-align="center center">
-                .
-              </md-content>
             </div>
+
             <div layout="row" layout-sm="column" layout-wrap>
-              <div flex layout="column" layout-align="center center">
+              <div flex=30 layout="column" layout-align="center center">
                 It should work on
               </div>
-              <div flex>
-                <md-checkbox ng-checked="android" ng-click="android = !android">
-                  android
+              <div flex=10>
+                <md-checkbox ng-click="android = !android" aria-label="android">
+                  <md-icon md-svg-src="/ic_android_48px.svg" aria-label="android"></md-icon>
                 </md-checkbox>
               </div>
-              <div flex>
-                <md-checkbox ng-checked="linux" ng-click="linux = !linux">
-                  linux
-                </md-checkbox>
-              </div>
-              <div flex>
-                <md-checkbox ng-checked="windows" ng-click="windows = !windows">
-                  windows
-                </md-checkbox>
-              </div>
-              <div flex>
-                <md-checkbox ng-checked="mac" ng-click="mac = !mac">
-                  mac
+              <div flex=10>
+                <md-checkbox ng-click="desktop = !desktop">
+                  <md-icon md-svg-src="/ic_computer_48px.svg" aria-label="desktop"></md-icon>
+                  <md-tooltip md-direction="bottom">
+                    linux + windows + mac
+                  </md-tooltip>
                 </md-checkbox>
               </div>
             </div>
+
+            <md-divider ng-show="advanced && android"></md-divider>
+            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
+              <div flex=30 layout="column" layout-align="center center">
+                <md-icon md-svg-src="/ic_android_48px.svg" aria-label="android"></md-icon>
+              </div>
+              <div flex>
+                <md-input-container flex>
+                  <label>package name</label>
+                  <input type="text" ng-required="true" ng-model="config.android.packageName" ng-disabled="true">
+                </md-input-container>
+              </div>
+              <div flex>
+                <md-checkbox ng-model="config.android.fullscreen" ng-disabled="true">
+                  Fullscreen
+                </md-checkbox>
+              </div>
+            </div>
+
+            <md-divider ng-show="advanced && desktop"></md-divider>
+            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+              <div flex=30 layout="column" layout-align="center center"></div>
+              <div flex=23>
+                <md-input-container flex>
+                  <label>width</label>
+                  <input type="number" ng-required="true" ng-model="config.desktop.width" ng-disabled="true">
+                </md-input-container>
+              </div>
+              <div flex=23>
+                <md-input-container flex>
+                  <label>height</label>
+                  <input type="number" ng-required="true" ng-model="config.desktop.height" ng-disabled="true">
+                </md-input-container>
+              </div>
+              <div flex>
+                <md-checkbox ng-model="config.desktop.fullscreen" ng-disabled="true">
+                  Fullscreen
+                </md-checkbox>
+              </div>
+            </div>
+            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+              <div flex=30 layout="column" layout-align="center center">
+                <md-icon md-svg-src="/ic_computer_48px.svg" aria-label="desktop"></md-icon>
+              </div>
+              <div flex>
+                <md-button ng-disabled="true">
+                  <label for="file-input">Icon</label>
+                </md-button>
+                <input id="file-input" type="file" ng-disabled="true">
+              </div>
+            </div>
+
+            <md-content layout="row" layout-sm="column" layout-wrap ng-show="advanced && !(android || desktop)">
+              <md-content flex layout="column" layout-align="center center">^ select at least one target platform</md-content>
+            </md-content>
+
           </form>
         </md-card-content>
+
         <div class="md-actions" layout="row" layout-align="end center">
-          <md-button ng-click="generate()" ng-disabled="!myForm.$valid">Generate & Download</md-button>
+          <md-button ng-click="advanced = true" ng-hide="advanced">
+            Advanced
+            <md-tooltip md-direction="top">
+              Shows more config option
+            </md-tooltip>
+          </md-button>
+          <md-button ng-click="generate()" ng-disabled="!myForm.$valid || !(desktop || android)">
+            Generate & Download
+            <md-tooltip md-direction="top">
+              You need node.js to build
+            </md-tooltip>
+          </md-button>
         </div>
+
       </md-card>
     </md-content>
 
@@ -84,7 +160,7 @@
 
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.11 used here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.1/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
 
@@ -99,17 +175,33 @@ app.config(function($mdThemingProvider) {
 app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
   $scope.config = {
     name: 'CoolBeans',
-    url: 'https://cool-beans.com/'
+    url: 'https://cool-beans.com/',
+    desktop: {
+      width: 800,
+      height: 600,
+      fullscreen: false
+    },
+    android: {
+      packageName: 'fallen.software.glassic',
+      fullscreen: false
+    }
   };
 
+  $scope.$watch('config.name', function (newValue, oldValue) {
+    if (newValue == undefined) {
+      return;
+    }
+    $scope.config.android.packageName = "fallen.software." + newValue.toLowerCase();
+  });
+
   showToast = function (s) {
-    $mdToast.show($mdToast.simple().content(s).position('bottom right').hideDelay(3000));
-  }
+    $mdToast.show($mdToast.simple().content(s).position('top right').hideDelay(3000));
+  };
 
   $scope.generate = function () {
     var zip = new JSZip();
     zip.folder($scope.config.name + "-glassic");
-    zip.file($scope.config.name + '-glassic/generated-config.json', angular.toJson($scope.config));
+    zip.file($scope.config.name + '-glassic/generated-config.json', angular.toJson($scope.config, true));
     var startCommands = [
       '#!/usr/bin/env sh',
       '',
@@ -124,7 +216,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
     var content = zip.generate({type: 'blob'});
     saveAs(content, $scope.config.name + '-glassic.zip');
 
-    showToast('App generated.');
+    showToast("Extract the archive and run start.sh");
   };
 }]);
     </script>
