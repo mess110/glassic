@@ -8,6 +8,10 @@ glassic commands
       - compiles according to **config.json**
       - prints help
 
+    npm run help
+
+      - prints this help
+
     npm run glassic
 
       - alias for npm install
