@@ -66,23 +66,34 @@
                 <md-checkbox ng-click="android = !android" aria-label="android">
                   <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
                 </md-checkbox>
+                <md-tooltip md-direction="bottom">
+                  android
+                </md-tooltip>
               </div>
               <div flex=10>
-                <md-checkbox ng-click="desktop = !desktop">
+                <md-checkbox ng-click="desktop = !desktop" aria-label="desktop">
                   <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
-                  <md-tooltip md-direction="bottom">
-                    linux + windows + mac
-                  </md-tooltip>
                 </md-checkbox>
+                <md-tooltip md-direction="bottom">
+                  linux + windows + mac
+                </md-tooltip>
+              </div>
+              <div flex=10>
+                <md-checkbox ng-click="ios = !ios" aria-label="ios">
+                  <md-icon md-svg-src="ic_phone_iphone_48px.svg" aria-label="ios"></md-icon>
+                </md-checkbox>
+                <md-tooltip md-direction="bottom">
+                  iOS 7
+                </md-tooltip>
               </div>
             </div>
 
             <md-divider ng-show="advanced && android"></md-divider>
-            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
+            <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
               <div flex=30 layout="column" layout-align="center center">
                 <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
               </div>
-              <div flex>
+              <div flex=40>
                 <md-input-container flex>
                   <label>package name</label>
                   <input type="text" ng-required="true" ng-model="config.android.packageName" ng-disabled="true">
@@ -93,18 +104,25 @@
                   Fullscreen
                 </md-checkbox>
               </div>
+              <div flex>
+                <md-checkbox ng-model="config.android.offline" ng-disabled="true">
+                  Offline Mode
+                </md-checkbox>
+              </div>
             </div>
 
             <md-divider ng-show="advanced && desktop"></md-divider>
-            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
-              <div flex=30 layout="column" layout-align="center center"></div>
-              <div flex=23>
+            <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+              <div flex=30 layout="column" layout-align="center center">
+                <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
+              </div>
+              <div flex=20>
                 <md-input-container flex>
                   <label>width</label>
                   <input type="number" ng-required="true" ng-model="config.desktop.width" ng-disabled="true">
                 </md-input-container>
               </div>
-              <div flex=23>
+              <div flex=20>
                 <md-input-container flex>
                   <label>height</label>
                   <input type="number" ng-required="true" ng-model="config.desktop.height" ng-disabled="true">
@@ -115,11 +133,6 @@
                   Fullscreen
                 </md-checkbox>
               </div>
-            </div>
-            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
-              <div flex=30 layout="column" layout-align="center center">
-                <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
-              </div>
               <div flex>
                 <md-button ng-disabled="true">
                   <label for="file-input">Icon</label>
@@ -127,8 +140,26 @@
                 <input id="file-input" type="file" ng-disabled="true">
               </div>
             </div>
+            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+              <div flex=30 layout="column" layout-align="center center"></div>
+            </div>
 
-            <md-content layout="row" layout-sm="column" layout-wrap ng-show="advanced && !(android || desktop)">
+            <md-divider ng-show="advanced && ios"></md-divider>
+            <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && ios">
+              <div flex=30 layout="column" layout-align="center center">
+                <md-icon md-svg-src="ic_phone_iphone_48px.svg" aria-label="ios"></md-icon>
+              </div>
+              <div flex=40>
+              </div>
+              <div flex>
+                <md-checkbox ng-model="config.ios.fullscreen" ng-disabled="true">
+                  Fullscreen
+                </md-checkbox>
+              </div>
+            </div>
+
+            <md-divider ng-show="advanced && !(android || desktop || ios)"></md-divider>
+            <md-content class='md-padding' style="padding-top: 30px" layout="row" layout-sm="column" layout-wrap ng-show="advanced && !(android || desktop || ios)">
               <md-content flex layout="column" layout-align="center center">^ select at least one target platform</md-content>
             </md-content>
 
@@ -145,7 +176,7 @@
           <md-button ng-click="generate()" ng-disabled="!myForm.$valid || !(desktop || android)">
             Generate & Download
             <md-tooltip md-direction="top">
-              You need node.js to build
+              node.js required to run
             </md-tooltip>
           </md-button>
         </div>
@@ -183,6 +214,10 @@ app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
     },
     android: {
       packageName: 'fallen.software.glassic',
+      offline: false,
+      fullscreen: false
+    },
+    ios: {
       fullscreen: false
     }
   };
