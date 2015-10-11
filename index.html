@@ -167,13 +167,13 @@
         </md-card-content>
 
         <div class="md-actions" layout="row" layout-align="end center">
-          <md-button ng-click="advanced = true" ng-hide="advanced">
+          <md-button class="" ng-click="advanced = true" ng-hide="advanced">
             Advanced
             <md-tooltip md-direction="top">
               Shows more config option
             </md-tooltip>
           </md-button>
-          <md-button ng-click="generate()" ng-disabled="!myForm.$valid || !(desktop || android)">
+          <md-button class="md-raised md-primary" ng-click="generate()" ng-disabled="!myForm.$valid || !(desktop || android)">
             Generate & Download
             <md-tooltip md-direction="top">
               node.js required to run
