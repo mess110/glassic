@@ -4,19 +4,17 @@
   "description": "Simple webview application generator",
   "scripts": {
     "glassic": "npm install",
-    "install": "npm run update:submodules && npm run compile && npm run help",
-
+    "install": "npm run update:submodules && npm run test:install && npm run compile && npm run help",
     "update:submodules": "git submodule foreach git pull origin master",
-
     "compile": "./node_modules/coffee-script/bin/coffee libs/wrapper.coffee",
     "compile:android": "cd templates/android; ./gradlew clean; ./gradlew build",
-
+    "test": "./node_modules/mocha/bin/mocha -w --compilers coffee:coffee-script/register",
+    "test:install": "./node_modules/mocha/bin/mocha --compilers coffee:coffee-script/register",
     "help": "cat wiki/Help.md",
     "help:android": "cat templates/android/README.md",
     "help:desktop": "cat templates/desktop/README.md",
     "help:apk": "ls templates/android/app/build/outputs/apk/",
     "help:ios": "echo 'See templates/ios7/README.md for compiling instructions.'",
-
     "demo:android": "npm run compile:android; npm run help:apk",
     "demo:linux": "cd templates/desktop; ./linux"
   },
@@ -28,6 +26,8 @@
   "license": "LGPL-3.0",
   "homepage": "https://github.com/mess110/glassic",
   "devDependencies": {
-    "coffee-script": "^1.10.0"
+    "coffee-script": "^1.10.0",
+    "mocha": "^2.3.3",
+    "shelljs": "^0.5.3"
   }
 }

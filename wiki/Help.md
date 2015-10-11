@@ -15,3 +15,4 @@ commands
 
     npm run help
     npm run help:ios
+

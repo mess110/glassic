@@ -8,8 +8,8 @@
       "icon": "favicon.png",
       "toolbar": false,
       "frame": true,
-      "width": 800,
-      "height": 600,
+      "width": ${desktop.width},
+      "height": ${desktop.height},
       "position": "center"
     },
     "webkit": {
