@@ -14,7 +14,7 @@ utils =
       sed '-i', /\$\{name\}/g, config.name, file
       sed '-i', /\$\{url\}/g, config.url, file
       sed '-i', /\$\{desktop.width\}/g, config.desktop.width, file
-      sed '-i', /\$\{desktop.height\}/g, config.desktop.height, file
+      sed '-i', /\$\{android.packageName\}/g, config.android.packageName, file
     cd returnPath
 
 module.exports = utils

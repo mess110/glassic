@@ -1,4 +1,4 @@
-package ro.northpole.mind.webview;
+package ${android.packageName};
 
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -10,7 +10,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import ro.northpole.music.webview.R;
+import ${android.packageName}.R;
 
 
 public class ShowWebView extends Activity {
