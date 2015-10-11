@@ -1,4 +1,17 @@
 {
   "name": "CoolBeans",
-  "url": "https://cool-beans.com/"
+  "url": "https://cool-beans.com/",
+  "desktop": {
+    "width": 800,
+    "height": 600,
+    "fullscreen": false
+  },
+  "android": {
+    "packageName": "fallen.software.coolbeans",
+    "offline": false,
+    "fullscreen": false
+  },
+  "ios": {
+    "fullscreen": false
+  }
 }
