@@ -6,6 +6,7 @@ utils = require('./utils.coffee')
 config = require('../config.json')
 
 utils.validateConfig(config)
+packagePath = config.android.packageName.replace(/\./g, '/')
 
 desktopFiles = ['README.md', 'package.json', 'index.html']
 utils.replaceVars('templates/desktop', '../..', desktopFiles, config)
@@ -19,3 +20,8 @@ androidFiles = [
   'app/src/main/java/ro/northpole/mind/webview/ShowWebView.java'
 ]
 utils.replaceVars('templates/android', '../..', androidFiles, config)
+
+cd 'templates/android'
+mkdir('-p', "app/src/main/java/#{packagePath}")
+mv('app/src/main/java/ro/northpole/mind/webview/ShowWebView.java', "app/src/main/java/#{packagePath}")
+cd '../..'
