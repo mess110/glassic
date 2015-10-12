@@ -2,14 +2,14 @@
 
 require 'shelljs/global'
 
-utils = require('./utils.coffee')
+Utils = require('./Utils.coffee')
 config = require('../config.json')
 
-utils.validateConfig(config)
-packagePath = config.android.packageName.replace(/\./g, '/')
+Utils.validateConfig(config)
 
 desktopFiles = ['README.md', 'package.json', 'index.html']
-utils.replaceVars('templates/desktop', '../..', desktopFiles, config)
+Utils.replaceVars('templates/desktop', '../..', desktopFiles, config)
+Utils.moveDesktopIcon()
 
 androidFiles = [
   'README.md'
@@ -19,9 +19,14 @@ androidFiles = [
   'app/src/main/res/menu/show_web_view.xml'
   'app/src/main/java/ro/northpole/mind/webview/ShowWebView.java'
 ]
-utils.replaceVars('templates/android', '../..', androidFiles, config)
+Utils.replaceVars('templates/android', '../..', androidFiles, config)
 
-cd 'templates/android'
-mkdir('-p', "app/src/main/java/#{packagePath}")
-mv('app/src/main/java/ro/northpole/mind/webview/ShowWebView.java', "app/src/main/java/#{packagePath}")
-cd '../..'
+javaSrcFiles = [
+  'app/src/main/java/ro/northpole/mind/webview/ShowWebView.java'
+]
+Utils.moveSrcToPackageFolder('templates/android', '../..', javaSrcFiles, config)
+
+ios7Files = [
+  'Demo/Classes/ViewController.m'
+]
+Utils.replaceVars('templates/ios7', '../..', ios7Files, config)

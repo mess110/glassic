@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
 import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -20,16 +21,25 @@ public class ShowWebView extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+        if (${android.fullscreen}) {
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        }
 
         setContentView(R.layout.show_web_view);
 
         webView = (WebView) findViewById(R.id.webView1);
         webView.setWebViewClient(new MyWebViewClient());
-        if (haveNetworkConnection()) {
-            startWebView("${url}");
+
+        if (${android.offline}) {
+            startWebView("file:///android_asset/index.html");
         } else {
-            startWebView("file:///android_asset/error.html");
+          if (haveNetworkConnection()) {
+              startWebView("${url}");
+          } else {
+              startWebView("file:///android_asset/error.html");
+          }
         }
     }
 

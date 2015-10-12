@@ -10,7 +10,8 @@
       "frame": true,
       "width": ${desktop.width},
       "height": ${desktop.height},
-      "position": "center"
+      "position": "center",
+      "kiosk": ${desktop.fullscreen}
     },
     "webkit": {
         "plugin": true
