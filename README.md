@@ -30,7 +30,7 @@ and run the help command.
 
 ## Getting started
 
-TODO: asciinema
+[![asciicast](https://asciinema.org/a/90gacruq5lxm2swcuow2s74pb.png)](https://asciinema.org/a/90gacruq5lxm2swcuow2s74pb)
 
 Assuming you went through the installation step, you now the git repositories
 for your applications. They can be found in the [templates](templates/) folder.
