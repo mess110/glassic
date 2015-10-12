@@ -1,8 +1,10 @@
-# [glassic](https://mess110.github.io/glassic/)
+glassic
+==============
 
 [![Build Status](https://travis-ci.org/mess110/glassic.svg?branch=master)](https://travis-ci.org/mess110/glassic)
 
-![glassic](wiki/snapshot.png)
+[![glassic](wiki/snapshot.png)](https://mess110.github.com/glassic/)
+
 
 Simple webview application generator for:
 
