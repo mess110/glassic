@@ -15,10 +15,8 @@ Here is an overview of what the commands do.
 
     npm install
 
-      - updates glassic
       - installs dependencies
-      - compiles according to **config.json**
-      - prints help
+      - updates glassic
 
     npm run help
 
@@ -26,7 +24,10 @@ Here is an overview of what the commands do.
 
     npm run glassic
 
-      - alias for npm install
+      - npm install
+      - runs tests
+      - compiles according to config.json
+      - npm run help
 
     npm run demo:linux
 

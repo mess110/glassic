@@ -1,5 +1,7 @@
 # glassic
 
+![glassic](wiki/snapshot.png)
+
 Simple webview application generator for:
 
 * android
