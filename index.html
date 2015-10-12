@@ -292,12 +292,20 @@ app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
     var startCommands = [
       '#!/usr/bin/env sh',
       '',
+      'which node',
+      'if [ $? -ne 0 ]; then',
+      '  echo "node.js not installed" 1>&2',
+      '  exit 1',
+      'fi',
+      '',
       'git clone git@github.com:mess110/glassic.git',
+      '',
       'cp -rf glassic/* .',
       'cp -rf glassic/.* .',
       'rm -rf glassic/',
       'mv generated-config.json config.json',
-      'npm install'
+      '',
+      'npm run glassic'
     ]
     zip.file($scope.config.name + '-glassic/start.sh', startCommands.join('\n'));
     zip.folder($scope.config.name + "-glassic/assets");
