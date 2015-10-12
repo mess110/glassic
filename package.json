@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Simple webview application generator",
   "scripts": {
-    "glassic": "npm install && npm run test && npm run compile && npm run help"
+    "glassic": "npm install && npm run test && npm run compile && npm run help",
     "install": "npm run update:submodules",
     "update:submodules": "git submodule update --init --recursive && git submodule foreach git pull origin master",
     "compile": "./node_modules/coffee-script/bin/coffee libs/wrapper.coffee",
