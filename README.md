@@ -1,4 +1,6 @@
-# glassic
+# [glassic](https://mess110.github.io/glassic/)
+
+[![Build Status](https://travis-ci.org/mess110/glassic.svg?branch=master)](https://travis-ci.org/mess110/glassic)
 
 ![glassic](wiki/snapshot.png)
 

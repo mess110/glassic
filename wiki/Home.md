@@ -13,21 +13,20 @@ Convert website into application for different platforms.
 
 Here is an overview of what the commands do.
 
-    npm install
-
-      - installs dependencies
-      - updates glassic
-
     npm run help
 
-      - prints this help
+      - prints help
+
+    npm install
+
+      - updates glassic
+      - installs dependencies
+      - compiles according to **config.json**
+      - prints help
 
     npm run glassic
 
-      - npm install
-      - runs tests
-      - compiles according to config.json
-      - npm run help
+      - alias for npm install
 
     npm run demo:linux
 
@@ -43,20 +42,15 @@ Here is an overview of what the commands do.
 
 ## TODO
 
-- config file format
-  - url
-  - icon
-  - name
-  - fullscreen (android only)
-  - keyboard overlay (android only)
-- dekstop app as GUI (nw.js)
 - android app
-  - loading icon
+  - icon
+  - keyboard overlay
   - document android version
   - document build howto
 - dekstop app
   - windows runner
-  - linux runner
   - mac runner
 - include and respect licenses
 - iphone app
+  - name
+  - fullscreen
