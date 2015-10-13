@@ -161,4 +161,4 @@ describe 'Utils', ->
 
     it 'replaces . with /', ->
       packagePath = utils.getAndroidPackagePath(config)
-      assert.equal(packagePath, 'fallen/software/coolbeans')
+      assert.equal(packagePath, config.android.packageName.replace(/\./g, '/'))
