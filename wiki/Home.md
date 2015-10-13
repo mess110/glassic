@@ -42,6 +42,9 @@ Here is an overview of what the commands do.
 
 ## TODO
 
+- build server
+- package apps
+  - https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps
 - android app
   - icon
   - keyboard overlay
