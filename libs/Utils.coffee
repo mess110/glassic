@@ -67,3 +67,8 @@ module.exports = class Utils
         mv('-f', file, packagePath)
 
     cd returnPath
+
+  @checkoutTemplates: ->
+    if (exec('git checkout templates/').code != 0)
+      echo('Error: Git checkout failed')
+      exit(1)

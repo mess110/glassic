@@ -6,6 +6,7 @@ Utils = require('./Utils.coffee')
 config = require('../config.json')
 
 Utils.validateConfig(config)
+Utils.checkoutTemplates()
 
 desktopFiles = ['README.md', 'package.json', 'index.html']
 Utils.replaceVars('templates/desktop', '../..', desktopFiles, config)
