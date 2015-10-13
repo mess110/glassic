@@ -63,6 +63,7 @@ module.exports = class Utils
     mkdir('-p', packagePath)
 
     for file in files
-      mv('-f', file, packagePath)
+      if test('-e', file)
+        mv('-f', file, packagePath)
 
     cd returnPath
