@@ -31,6 +31,9 @@
     </style>
   </head>
   <body ng-controller="AppCtrl">
+    <md-button class="md-fab md-primary md-fab-bottom-left" aria-label="help" ng-click="showAdvanced($event)">
+      <b>?</b>
+    </md-button>
     <md-content class="md-padding">
       <md-card>
         <md-card-content>
@@ -255,7 +258,19 @@ app.directive('javaPackageName', function() {
     };
 });
 
-app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
+app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', function($scope, $mdToast, $mdDialog) {
+  function DialogController($scope, $mdDialog) {
+    $scope.hide = function() {
+      $mdDialog.hide();
+    };
+    $scope.cancel = function() {
+      $mdDialog.cancel();
+    };
+    $scope.answer = function(answer) {
+      $mdDialog.hide(answer);
+    };
+  }
+
   $scope.config = {
     name: 'CoolBeans',
     url: 'https://cool-beans.com/',
@@ -280,6 +295,21 @@ app.controller('AppCtrl', ['$scope', '$mdToast', function($scope, $mdToast) {
     }
     $scope.config.android.packageName = "fallen.software." + newValue.toLowerCase().replace(/\W+/g, '');
   });
+
+  $scope.showAdvanced = function(ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'help.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    })
+    .then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
+  };
 
   showToast = function (s) {
     $mdToast.show($mdToast.simple().content(s).position('top right').hideDelay(3000));
