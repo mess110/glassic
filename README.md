@@ -23,7 +23,22 @@ Developed with:
 
 ## Installation
 
-    npm install
+### Easy way
+
+Use [glassic wizzard](https://github.com/mess110/glassic) to generate your application
+and run *start.sh* from the generated archive.
+
+### Extra easy way
+
+Use [glassic wizzard](https://github.com/mess110/glassic) to generate your application
+and use the build servers. *TODO*
+
+### Hard way:
+
+    git clone https://github.com/mess110/glassic.git
+    cd glassic/
+    vim config.json
+    npm run glassic
 
 This will install dependencies, compile according to [config.json](config.json)
 and run the help command.
@@ -32,7 +47,7 @@ and run the help command.
 
 [![asciicast](https://asciinema.org/a/90gacruq5lxm2swcuow2s74pb.png)](https://asciinema.org/a/90gacruq5lxm2swcuow2s74pb)
 
-Assuming you went through the installation step, you now the git repositories
+Assuming you went through the installation steps, you now the git repositories
 for your applications. They can be found in the [templates](templates/) folder.
 
 Lets run the desktop app:
