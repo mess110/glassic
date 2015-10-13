@@ -1,3 +1,3 @@
 [submodule "templates/ios7"]
 	path = templates/ios7
-	url = git@github.com:mess110/SVWebViewController.git
+	url = https://github.com/mess110/SVWebViewController
