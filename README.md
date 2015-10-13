@@ -45,7 +45,7 @@ and run the help command.
 
 ## Getting started
 
-[![asciicast](https://asciinema.org/a/90gacruq5lxm2swcuow2s74pb.png)](https://asciinema.org/a/90gacruq5lxm2swcuow2s74pb)
+[![asciicast](https://asciinema.org/a/1r8ci9q4zupt8w0w0a0tils96.png)](https://asciinema.org/a/1r8ci9q4zupt8w0w0a0tils96)
 
 Assuming you went through the installation steps, you now the git repositories
 for your applications. They can be found in the [templates](templates/) folder.
