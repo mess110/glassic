@@ -30,7 +30,7 @@
         position: relative;
         left: 0;
         right: 0;
-    }
+      }
 
       h2 span {
         color: rgba(0,0,0,0.54);
@@ -103,13 +103,11 @@
               <div flex=30 layout="column" layout-align="center center" class="center-it">
                 <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
               </div>
-              <div flex>
+              <div flex=35 flex-sm=100>
                 <md-input-container flex>
                   <label>package name</label>
                   <input type="text" ng-required="true" ng-model="config.android.packageName" ng-disabled="false" java-package-name>
                 </md-input-container>
-              </div>
-              <div flex>
               </div>
               <div flex>
                 <md-checkbox ng-model="config.android.fullscreen" ng-disabled="false">
@@ -151,7 +149,7 @@
               <div flex>
                 <!-- <img ng-show="desktopIcon" for="file-input" ng-src="{{desktopIcon}}" style="width: 64px; height: 64px"/> -->
                 <md-button ng-disabled="false">
-                  <label for="file-input">
+                  <label for="file-input" style="display: block;">
                     Icon
                   </label>
                 </md-button>
@@ -221,7 +219,7 @@
       var app = angular.module('app', ['ngMaterial']);
 
 String.prototype.endsWith = function(suffix) {
-    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+  return this.indexOf(suffix, this.length - suffix.length) !== -1;
 };
 
 app.config(function($mdThemingProvider) {
@@ -230,31 +228,31 @@ app.config(function($mdThemingProvider) {
 });
 
 app.directive("fileread", [function () {
-    return {
-        scope: {
-            fileread: "="
-        },
+  return {
+    scope: {
+      fileread: "="
+    },
         link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
-                var reader = new FileReader();
+          element.bind("change", function (changeEvent) {
+            var reader = new FileReader();
                 reader.onload = function (loadEvent) {
-                    scope.$apply(function () {
-                        scope.fileread = loadEvent.target.result;
-                    });
+                  scope.$apply(function () {
+                    scope.fileread = loadEvent.target.result;
+                  });
                 }
                 reader.readAsDataURL(changeEvent.target.files[0]);
-            });
+          });
         }
-    }
+  }
 }]);
 
 app.directive('javaPackageName', function() {
-    return {
-        restrict: 'A',
+  return {
+    restrict: 'A',
         require: 'ngModel',
         link: function(scope, element, attr, ngModel) {
-            function customValidator(ngModelValue) {
-                var pkgs = ngModelValue.split('.')
+          function customValidator(ngModelValue) {
+            var pkgs = ngModelValue.split('.')
                 var contains3Dots = pkgs.length >= 3;
                 var doesNotStartWithDot = ngModelValue.indexOf('.') != 0;
                 var doesNotEndWithDot = !ngModelValue.endsWith('.')
@@ -264,11 +262,11 @@ app.directive('javaPackageName', function() {
                 var valid = contains3Dots && doesNotStartWithDot && doesNotEndWithDot && reg;
                 ngModel.$setValidity('packageName', valid);
                 return valid ? ngModelValue : undefined;
-            }
+          }
             ngModel.$formatters.unshift(customValidator);
             ngModel.$parsers.unshift(customValidator);
         }
-    };
+  };
 });
 
 app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', function($scope, $mdToast, $mdDialog) {
@@ -317,11 +315,11 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', function($scope, $
       targetEvent: ev,
       clickOutsideToClose:true
     })
-    .then(function(answer) {
-      $scope.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      $scope.status = 'You cancelled the dialog.';
-    });
+      .then(function(answer) {
+        $scope.status = 'You said the information was "' + answer + '".';
+      }, function() {
+        $scope.status = 'You cancelled the dialog.';
+      });
   };
 
   showToast = function (s) {
