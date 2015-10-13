@@ -25,6 +25,13 @@
         padding-bottom: 2px;
       }
 
+      .center-it {
+        margin: auto;
+        position: relative;
+        left: 0;
+        right: 0;
+    }
+
       h2 span {
         color: rgba(0,0,0,0.54);
       }
@@ -42,8 +49,8 @@
 
           <form name="myForm">
 
-            <div layout="row" layout-sm="column" layout-wrap>
-              <md-content flex=30 layout="column" layout-align="center center">
+            <div layout="row" layout-wrap>
+              <md-content hide-sm flex=30 layout="column" layout-align="center center">
                 I want an application called
               </md-content>
               <md-input-container flex>
@@ -51,8 +58,8 @@
                 <input ng-required="true" ng-model="config.name" ng-minlength="2" ng-maxlength="30" ng-pattern="/^[0-9A-Za-z\-\_\ \!\@\#\?\+\.\,]*$/">
               </md-input-container>
             </div>
-            <div layout="row" layout-sm="column" layout-wrap>
-              <md-content flex=30 layout="column" layout-align="center center">
+            <div layout="row" layout-wrap>
+              <md-content hide-sm layout-sm="row" flex=30 layout="column" layout-align="center center">
                 pointing to
               </md-content>
               <md-input-container flex>
@@ -61,11 +68,11 @@
               </md-input-container>
             </div>
 
-            <div layout="row" layout-sm="column" layout-wrap>
-              <div flex=30 layout="column" layout-align="center center">
+            <div layout="row" layout-wrap>
+              <div hide-sm flex=30 layout="column" layout-align="center center">
                 It should work on
               </div>
-              <div flex=10>
+              <div flex=10 flex-sm=33>
                 <md-checkbox ng-click="android = !android" aria-label="android">
                   <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
                 </md-checkbox>
@@ -73,7 +80,7 @@
                   android
                 </md-tooltip>
               </div>
-              <div flex=10>
+              <div flex=10 flex-sm=33>
                 <md-checkbox ng-click="desktop = !desktop" aria-label="desktop">
                   <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
                 </md-checkbox>
@@ -81,7 +88,7 @@
                   linux + windows + mac
                 </md-tooltip>
               </div>
-              <div flex=10>
+              <div flex=10 flex-sm=33>
                 <md-checkbox ng-click="ios = !ios" aria-label="ios">
                   <md-icon md-svg-src="ic_phone_iphone_48px.svg" aria-label="ios"></md-icon>
                 </md-checkbox>
@@ -93,10 +100,10 @@
 
             <md-divider ng-show="advanced && android"></md-divider>
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
-              <div flex=30 layout="column" layout-align="center center">
+              <div flex=30 layout="column" layout-align="center center" class="center-it">
                 <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
               </div>
-              <div flex=40>
+              <div flex>
                 <md-input-container flex>
                   <label>package name</label>
                   <input type="text" ng-required="true" ng-model="config.android.packageName" ng-disabled="false" java-package-name>
@@ -119,16 +126,16 @@
 
             <md-divider ng-show="advanced && desktop"></md-divider>
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
-              <div flex=30 layout="column" layout-align="center center">
+              <div flex=30 layout="column" layout-align="center center" class="center-it">
                 <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
               </div>
-              <div flex=20>
+              <div flex>
                 <md-input-container flex>
                   <label>width</label>
                   <input type="number" ng-required="true" ng-model="config.desktop.width" ng-disabled="config.desktop.fullscreen">
                 </md-input-container>
               </div>
-              <div flex=20>
+              <div flex>
                 <md-input-container flex>
                   <label>height</label>
                   <input type="number" ng-required="true" ng-model="config.desktop.height" ng-disabled="config.desktop.fullscreen">
@@ -155,7 +162,7 @@
 
             <md-divider ng-show="advanced && ios"></md-divider>
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && ios">
-              <div flex=30 layout="column" layout-align="center center">
+              <div flex=30 layout="column" layout-align="center center" class="center-it">
                 <md-icon md-svg-src="ic_phone_iphone_48px.svg" aria-label="ios"></md-icon>
               </div>
               <div flex=40>
