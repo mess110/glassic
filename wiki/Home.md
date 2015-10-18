@@ -42,8 +42,8 @@ Here is an overview of what the commands do.
 
 ## TODO
 
-- website
-  - customize build server email
+- web
+  - show build queue and status
 - build server
   - https
 - package apps
@@ -61,3 +61,4 @@ Here is an overview of what the commands do.
   - name
   - fullscreen
 - include and respect licenses
+- improve instructions from email

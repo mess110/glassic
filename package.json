@@ -17,7 +17,8 @@
     "help:apk": "ls templates/android/app/build/outputs/apk/",
     "help:ios": "echo 'See templates/ios7/README.md for compiling instructions.'",
     "demo:android": "npm run compile:android && npm run help:apk",
-    "demo:linux": "cd templates/desktop; ./linux"
+    "demo:linux": "cd templates/desktop; ./linux",
+    "package:desktop": "cd templates && tar -zcvf desktop.tar.gz desktop/ && cd .."
   },
   "repository": {
     "type": "git",
