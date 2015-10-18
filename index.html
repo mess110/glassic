@@ -48,7 +48,13 @@
 
           <h2 class="md-title">glassic <span>wizard</span></h2>
 
-          <form name="myForm">
+          <div layout="column" layout-align="center center" ng-show="building">
+            <p><b>{{config.name}}</b> is queued.</p>
+            <p>Total apps in build queue: <b>{{buildQueue.length || 0}}</b></p>
+            <p>NOTE: build status is not currently shown on this page (TODO)</p>
+          </div>
+
+          <form name="myForm" ng-hide="building">
 
             <div layout="row" layout-wrap>
               <md-content hide-sm flex=30 layout="column" layout-align="center center">
@@ -187,7 +193,7 @@
           </form>
         </md-card-content>
 
-        <div class="md-actions" layout="row" layout-align="end center">
+        <div class="md-actions" layout="row" layout-align="end center" ng-hide="building">
           <md-button ng-click="advanced = true" ng-hide="advanced">
             More
           </md-button>
@@ -265,7 +271,7 @@ app.directive('javaPackageName', function() {
   };
 });
 
-app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localStorage', function($scope, $mdToast, $mdDialog, $http, $localStorage) {
+app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localStorage', '$interval', function($scope, $mdToast, $mdDialog, $http, $localStorage, $interval) {
   $localStorage.beta = $localStorage.beta || false;
 
   function DialogController($scope, $mdDialog) {
@@ -349,6 +355,19 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     $mdToast.show($mdToast.simple().content(s).position('top right').hideDelay(3000));
   };
 
+  updateBuildQueueStatus = function () {
+    $http.get('http://glassic-jenkins.at.struktu.ro:8080/queue/api/json').then(function (data) {
+      $scope.buildQueue = data.data.items;
+    }, function (data) {
+      console.log(data);
+    });
+  }
+  $interval(function () {
+    if ($scope.building == true) {
+      updateBuildQueueStatus();
+    }
+  }, 5000);
+
   $scope.cloudBuild = function () {
     var fd = new FormData();
     fd.append('file0', zipFile());
@@ -364,6 +383,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     ).then(function (data) {
       console.log(data);
       showToast("App will be emailed to you shortly.");
+      $scope.building = true
     }, function (data) {
       console.log(data);
     });
