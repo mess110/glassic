@@ -1,0 +1,27 @@
+<md-dialog aria-label="help">
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>We'll email you the build</h2>
+      <span flex></span>
+      <md-button class="md-icon-button" ng-click="cancel()">
+        <b>x</b>
+      </md-button>
+    </div>
+  </md-toolbar>
+  <md-dialog-content style="max-width:800px;max-height:810px; ">
+    <div class="md-dialog-content">
+      <form name="emailInputForm">
+        <md-input-container flex>
+          <label>email</label>
+          <input type="email" ng-required="true" ng-model="config.email" ng-model-options="{ debounce: 200 }">
+        </md-input-container>
+      </form>
+      <!-- <p>Alternatively, you can <a href="https://github.com/mess110/glassic" target="_blank">build the apps yourself</a>.</p> -->
+    </div>
+    <div class="md-actions" layout="row">
+      <md-button class="md-primary md-raised" ng-disabled="!emailInputForm.$valid" ng-click="answer(0)">
+        Build
+      </md-button>
+    </div>
+  </md-dialog-content>
+</md-dialog>

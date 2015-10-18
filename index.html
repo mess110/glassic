@@ -38,7 +38,7 @@
     </style>
   </head>
   <body ng-controller="AppCtrl">
-    <md-button class="md-fab md-primary md-fab-bottom-left" aria-label="help" ng-click="showAdvanced($event)">
+    <md-button class="md-fab md-primary md-fab-bottom-left" aria-label="help" ng-click="showHelp($event)">
       <b>?</b>
     </md-button>
     <md-content class="md-padding">
@@ -189,21 +189,9 @@
         <div class="md-actions" layout="row" layout-align="end center">
           <md-button ng-click="advanced = true" ng-hide="advanced">
             Advanced
-            <md-tooltip md-direction="top">
-              Shows more config option
-            </md-tooltip>
           </md-button>
-          <md-button ng-click="generate()" ng-disabled="!myForm.$valid || !(desktop || android || ios)">
-            Generate & Download
-            <md-tooltip md-direction="top">
-              node.js required to run
-            </md-tooltip>
-          </md-button>
-          <md-button ng-click="cloud()" ng-disabled="!myForm.$valid || !(desktop || android || ios)" ng-show="isBeta()">
-            Cloud
-            <md-tooltip md-direction="top">
-              sit back and relax is required
-            </md-tooltip>
+          <md-button ng-click="build()" ng-disabled="!myForm.$valid || !(desktop || android || ios)">
+            Build
           </md-button>
         </div>
 
@@ -287,7 +275,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
       $mdDialog.cancel();
     };
     $scope.answer = function(answer) {
-      $mdDialog.hide(answer);
+      $mdDialog.hide($scope.config);
     };
   }
 
@@ -320,26 +308,40 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     $scope.config.android.packageName = "fallen.software." + newValue.toLowerCase().replace(/\W+/g, '');
   });
 
-  $scope.showAdvanced = function(ev) {
+  $scope.build = function (ev) {
+    $mdDialog.show({
+      controller: DialogController,
+      templateUrl: 'build.tmpl.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true
+    }).then(function(answer) {
+      $scope.config.email = answer.email;
+      $scope.cloudBuild()
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
+  };
+
+  $scope.showHelp = function (ev) {
     $mdDialog.show({
       controller: DialogController,
       templateUrl: 'help.tmpl.html',
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose:true
-    })
-      .then(function(answer) {
-        $scope.status = 'You said the information was "' + answer + '".';
-      }, function() {
-        $scope.status = 'You cancelled the dialog.';
-      });
+    }).then(function(answer) {
+      $scope.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      $scope.status = 'You cancelled the dialog.';
+    });
   };
 
   showToast = function (s) {
     $mdToast.show($mdToast.simple().content(s).position('top right').hideDelay(3000));
   };
 
-  $scope.cloud = function () {
+  $scope.cloudBuild = function () {
     var fd = new FormData();
     fd.append('file0', zipFile());
     fd.append('json', '{"parameter": [{"name":"generated.zip", "file":"file0"}]}');
@@ -353,6 +355,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     $http.post('http://glassic-jenkins.at.struktu.ro:8080/job/build-android/build', fd, config
     ).then(function (data) {
       console.log(data);
+      showToast("App will be emailed to you shortly.");
     }, function (data) {
       console.log(data);
     });
