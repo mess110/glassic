@@ -5,6 +5,7 @@
   "scripts": {
     "glassic": "npm install && npm run test && npm run compile && npm run help",
     "install": "npm run update:submodules",
+    "jenkins": "./node_modules/coffee-script/bin/coffee libs/jenkins.coffee",
     "update:submodules": "git submodule update --init --recursive && git submodule foreach git pull origin master",
     "compile": "./node_modules/coffee-script/bin/coffee libs/wrapper.coffee",
     "compile:android": "cd templates/android && ./gradlew clean && ./gradlew build",

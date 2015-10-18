@@ -42,10 +42,14 @@ Here is an overview of what the commands do.
 
 ## TODO
 
+- website
+  - customize build server email
 - build server
+  - https
 - package apps
   - https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps
 - android app
+  - auto-rotate screen options
   - icon
   - keyboard overlay
   - document android version
@@ -53,7 +57,7 @@ Here is an overview of what the commands do.
 - dekstop app
   - windows runner
   - mac runner
-- include and respect licenses
 - iphone app
   - name
   - fullscreen
+- include and respect licenses
