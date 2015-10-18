@@ -16,12 +16,14 @@
           <input type="email" ng-required="true" ng-model="config.email" ng-model-options="{ debounce: 200 }">
         </md-input-container>
       </form>
-      <!-- <p>Alternatively, you can <a href="https://github.com/mess110/glassic" target="_blank">build the apps yourself</a>.</p> -->
     </div>
     <div class="md-actions" layout="row">
       <md-button class="md-primary md-raised" ng-disabled="!emailInputForm.$valid" ng-click="answer(0)">
         Build
       </md-button>
     </div>
+    <p>
+      Or, <a href="#" ng-click="generate()">build the apps on your computer</a>.
+    </p>
   </md-dialog-content>
 </md-dialog>

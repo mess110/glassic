@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en" ng-app="app">
   <head>
     <meta name="viewport" content="initial-scale=1" />
@@ -188,9 +189,9 @@
 
         <div class="md-actions" layout="row" layout-align="end center">
           <md-button ng-click="advanced = true" ng-hide="advanced">
-            Advanced
+            More
           </md-button>
-          <md-button ng-click="build()" ng-disabled="!myForm.$valid || !(desktop || android || ios)">
+          <md-button class="md-primary md-raised" ng-click="build()" ng-disabled="!myForm.$valid || !(desktop || android || ios)">
             Build
           </md-button>
         </div>
@@ -268,13 +269,16 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
   $localStorage.beta = $localStorage.beta || false;
 
   function DialogController($scope, $mdDialog) {
-    $scope.hide = function() {
+    $scope.hide = function () {
       $mdDialog.hide();
     };
-    $scope.cancel = function() {
+    $scope.cancel = function () {
       $mdDialog.cancel();
     };
-    $scope.answer = function(answer) {
+    $scope.generate = function () {
+      $mdDialog.hide({ noEmail: true });
+    }
+    $scope.answer = function (answer) {
       $mdDialog.hide($scope.config);
     };
   }
@@ -316,8 +320,12 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
       targetEvent: ev,
       clickOutsideToClose:true
     }).then(function(answer) {
-      $scope.config.email = answer.email;
-      $scope.cloudBuild()
+      if (answer.noEmail == true) {
+        $scope.generate();
+      } else {
+        $scope.config.email = answer.email;
+        $scope.cloudBuild();
+      }
     }, function() {
       $scope.status = 'You cancelled the dialog.';
     });
