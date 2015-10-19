@@ -49,8 +49,6 @@ Here is an overview of what the commands do.
 - package apps
   - https://github.com/nwjs/nw.js/wiki/how-to-package-and-distribute-your-apps
 - android app
-  - auto-rotate screen options
-  - icon
   - keyboard overlay
   - document android version
   - document build howto

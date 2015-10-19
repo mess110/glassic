@@ -8,6 +8,7 @@
   },
   "android": {
     "packageName": "fallen.software.coolbeans",
+    "screenOrientation": "unspecified",
     "offline": false,
     "fullscreen": false
   },

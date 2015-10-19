@@ -104,6 +104,18 @@ describe 'Utils', ->
         @c.android.packageName = 'asd.asd'
         shouldHaveError(@c)
 
+      it 'has android.screenOrientation key', ->
+        delete @c.android.screenOrientation
+        shouldHaveError(@c)
+
+      it 'requires android.screenOrientation to be a string', ->
+        @c.android.screenOrientation = {}
+        shouldHaveError(@c)
+
+      it 'requires android.screenOrientation to be a valid value', ->
+        @c.android.screenOrientation = 'foo'
+        shouldHaveError(@c)
+
       # https://docs.oracle.com/javase/specs/jls/se6/html/packages.html#7.7
       describe 'requires android.packageName to be a valid JAVA package path', ->
 

@@ -26,6 +26,8 @@ module.exports = class Utils
     assert.equal(typeof(config.android), 'object')
     assert.equal(typeof(config.android.fullscreen), 'boolean')
     assert.equal(typeof(config.android.packageName), 'string')
+    assert.equal(typeof(config.android.screenOrientation), 'string')
+    assert.notEqual(['unspecified', 'portrait', 'landscape'].indexOf(config.android.screenOrientation), -1)
     assert.equal(typeof(config.android.offline), 'boolean')
 
     assert.equal(config.android.packageName.split('.').length >= 3, true)
@@ -47,6 +49,7 @@ module.exports = class Utils
       sed '-i', /\$\{desktop\.height\}/g, config.desktop.height, file
       sed '-i', /\$\{desktop\.fullscreen\}/g, config.desktop.fullscreen.toString(), file
       sed '-i', /\$\{android\.packageName\}/g, config.android.packageName, file
+      sed '-i', /\$\{android\.screenOrientation\}/g, config.android.screenOrientation, file
       sed '-i', /\$\{android\.fullscreen\}/g, config.android.fullscreen.toString(), file
       sed '-i', /\$\{android\.offline\}/g, config.android.offline.toString(), file
 
