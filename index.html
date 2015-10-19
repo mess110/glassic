@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="app">
   <head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
     <meta name="viewport" content="initial-scale=1" />
 
     <title>glassic wizard</title>
 
     <!-- Angular Material CSS now available via Google CDN; version 0.12 used here -->
-    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.css">
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.4/angular-material.min.css">
 
     <style type="text/css" media="all">
       html, body {
@@ -33,6 +35,10 @@
         right: 0;
       }
 
+      .right-padding-10 {
+        padding-right: 10px;
+      }
+
       h2 span {
         color: rgba(0,0,0,0.54);
       }
@@ -57,7 +63,7 @@
           <form name="myForm" ng-hide="building">
 
             <div layout="row" layout-wrap>
-              <md-content hide-sm flex=30 layout="column" layout-align="center center">
+              <md-content class="right-padding-10" hide-sm flex=30 layout="column" layout-align="center end">
                 I want an application called
               </md-content>
               <md-input-container flex>
@@ -66,7 +72,7 @@
               </md-input-container>
             </div>
             <div layout="row" layout-wrap>
-              <md-content hide-sm layout-sm="row" flex=30 layout="column" layout-align="center center">
+              <md-content class="right-padding-10" hide-sm layout-sm="row" flex=30 layout="column" layout-align="center end">
                 pointing to
               </md-content>
               <md-input-container flex>
@@ -76,7 +82,7 @@
             </div>
 
             <div layout="row" layout-wrap>
-              <div hide-sm flex=30 layout="column" layout-align="center center">
+              <div class="right-padding-10" hide-sm flex=30 layout="column" layout-align="center end">
                 It should work on
               </div>
               <div flex=10 flex-sm=33>
@@ -224,7 +230,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
 
     <!-- Angular Material Javascript now available via Google CDN; version 0.11 used here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.2/angular-material.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.4/angular-material.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
 
