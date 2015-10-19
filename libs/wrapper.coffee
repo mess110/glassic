@@ -26,6 +26,7 @@ javaSrcFiles = [
   'app/src/main/java/ro/northpole/mind/webview/ShowWebView.java'
 ]
 Utils.moveSrcToPackageFolder('templates/android', '../..', javaSrcFiles, config)
+Utils.moveAndroidIcons()
 
 ios7Files = [
   'Demo/Classes/ViewController.m'

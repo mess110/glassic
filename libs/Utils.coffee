@@ -56,6 +56,11 @@ module.exports = class Utils
     if test('-e', 'assets/favicon.png')
       mv('-f', 'assets/favicon.png', 'templates/desktop/favicon.png')
 
+  @moveAndroidIcons: ->
+    for iconSize in ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi']
+      if test('-e', "assets/#{iconSize}.png")
+        mv('-f', "assets/#{iconSize}.png", "templates/android/app/src/main/res/drawable-#{iconSize}/ic_launcher.png")
+
   @moveSrcToPackageFolder: (path, returnPath, files, config) ->
     cd path
 
