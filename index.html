@@ -185,97 +185,110 @@
                 <input id="file-input-android-xxhdpi" fileread="androidIconxxhdpi" type="file" accept="image/png">
               </div>
             </div>
-
-            <md-divider ng-show="advanced && desktop"></md-divider>
-            <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
-              <div flex=30 layout="column" layout-align="center center" class="center-it">
-                <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
-              </div>
-              <div flex>
-                <md-input-container flex>
-                  <label>width</label>
-                  <input type="number" ng-required="true" ng-model="config.desktop.width" ng-disabled="config.desktop.fullscreen">
-                </md-input-container>
-              </div>
-              <div flex>
-                <md-input-container flex>
-                  <label>height</label>
-                  <input type="number" ng-required="true" ng-model="config.desktop.height" ng-disabled="config.desktop.fullscreen">
-                </md-input-container>
-              </div>
-              <div flex>
-                <md-checkbox ng-model="config.desktop.fullscreen" ng-disabled="false">
-                  Fullscreen
-                </md-checkbox>
-              </div>
-              <div flex>
-                <md-button>
-                  <label for="file-input-desktop" style="display: block;">
-                    Icon
-                  </label>
-                  <md-tooltip md-direction="bottom" ng-show="desktopIcon">
-                    <img for="file-input-desktop" ng-src="{{desktopIcon}}" style="width: 64px; height: 64px"/>
-                  </md-tooltip>
-                </md-button>
-                <input id="file-input-desktop" fileread="desktopIcon" type="file" accept="image/png">
-              </div>
+          </div>
+          <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
+            <div flex=30 layout="column" layout-align="center center">
             </div>
-            <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
-              <div flex=30 layout="column" layout-align="center center"></div>
+            <div flex=17.5>
+              <md-input-container>
+                <label>Screen Orientation</label>
+                <md-select ng-model="config.android.screenOrientation">
+                  <md-option ng-repeat="orientation in screenOrientations" value="{{orientation}}">{{orientation}}</md-option>
+                </md-select>
+              </md-input-container>
             </div>
+          </div>
 
-            <md-divider ng-show="advanced && ios"></md-divider>
-            <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && ios">
-              <div flex=30 layout="column" layout-align="center center" class="center-it">
-                <md-icon md-svg-src="ic_phone_iphone_48px.svg" aria-label="ios"></md-icon>
-              </div>
-              <div flex>
-              </div>
-              <div flex>
-              </div>
-              <div flex>
-                <md-checkbox ng-model="config.ios.fullscreen" ng-disabled="true">
-                  Fullscreen
-                </md-checkbox>
-              </div>
-              <div flex>
-              </div>
+          <md-divider ng-show="advanced && desktop"></md-divider>
+          <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+            <div flex=30 layout="column" layout-align="center center" class="center-it">
+              <md-icon md-svg-src="ic_computer_48px.svg" aria-label="desktop"></md-icon>
             </div>
+            <div flex>
+              <md-input-container flex>
+                <label>width</label>
+                <input type="number" ng-required="true" ng-model="config.desktop.width" ng-disabled="config.desktop.fullscreen">
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-input-container flex>
+                <label>height</label>
+                <input type="number" ng-required="true" ng-model="config.desktop.height" ng-disabled="config.desktop.fullscreen">
+              </md-input-container>
+            </div>
+            <div flex>
+              <md-checkbox ng-model="config.desktop.fullscreen" ng-disabled="false">
+                Fullscreen
+              </md-checkbox>
+            </div>
+            <div flex>
+              <md-button>
+                <label for="file-input-desktop" style="display: block;">
+                  Icon
+                </label>
+                <md-tooltip md-direction="bottom" ng-show="desktopIcon">
+                  <img for="file-input-desktop" ng-src="{{desktopIcon}}" style="width: 64px; height: 64px"/>
+                </md-tooltip>
+              </md-button>
+              <input id="file-input-desktop" fileread="desktopIcon" type="file" accept="image/png">
+            </div>
+          </div>
+          <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+            <div flex=30 layout="column" layout-align="center center"></div>
+          </div>
 
-            <md-divider ng-show="advanced && !(android || desktop || ios)"></md-divider>
-            <md-content class='md-padding' style="padding-top: 30px" layout="row" layout-sm="column" layout-wrap ng-show="advanced && !(android || desktop || ios)">
-              <md-content flex layout="column" layout-align="center center">^ select at least one platform</md-content>
-            </md-content>
+          <md-divider ng-show="advanced && ios"></md-divider>
+          <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && ios">
+            <div flex=30 layout="column" layout-align="center center" class="center-it">
+              <md-icon md-svg-src="ic_phone_iphone_48px.svg" aria-label="ios"></md-icon>
+            </div>
+            <div flex>
+            </div>
+            <div flex>
+            </div>
+            <div flex>
+              <md-checkbox ng-model="config.ios.fullscreen" ng-disabled="true">
+                Fullscreen
+              </md-checkbox>
+            </div>
+            <div flex>
+            </div>
+          </div>
 
-          </form>
-        </md-card-content>
+          <md-divider ng-show="advanced && !(android || desktop || ios)"></md-divider>
+          <md-content class='md-padding' style="padding-top: 30px" layout="row" layout-sm="column" layout-wrap ng-show="advanced && !(android || desktop || ios)">
+            <md-content flex layout="column" layout-align="center center">^ select at least one platform</md-content>
+          </md-content>
 
-        <div class="md-actions" layout="row" layout-align="end center" ng-hide="building">
-          <md-button ng-click="advanced = true" ng-hide="advanced">
-            More
-          </md-button>
-          <md-button class="md-primary md-raised" ng-click="build()" ng-disabled="!myForm.$valid || !(desktop || android || ios)">
-            Build
-          </md-button>
-        </div>
+        </form>
+      </md-card-content>
 
-      </md-card>
-    </md-content>
+      <div class="md-actions" layout="row" layout-align="end center" ng-hide="building">
+        <md-button ng-click="advanced = true" ng-hide="advanced">
+          More
+        </md-button>
+        <md-button class="md-primary md-raised" ng-click="build()" ng-disabled="!myForm.$valid || !(desktop || android || ios)">
+          Build
+        </md-button>
+      </div>
 
-    <!-- Angular Material Dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
+    </md-card>
+  </md-content>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+  <!-- Angular Material Dependencies -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-animate.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular-aria.min.js"></script>
 
-    <!-- Angular Material Javascript now available via Google CDN; version 0.11 used here -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.4/angular-material.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
 
-    <script>
-      var app = angular.module('app', ['ngMaterial', 'ngStorage']);
+  <!-- Angular Material Javascript now available via Google CDN; version 0.11 used here -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angular_material/0.11.4/angular-material.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+
+  <script>
+    var app = angular.module('app', ['ngMaterial', 'ngStorage']);
 
 String.prototype.endsWith = function(suffix) {
   return this.indexOf(suffix, this.length - suffix.length) !== -1;
@@ -340,6 +353,7 @@ app.directive('javaPackageName', function() {
 app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localStorage', '$interval', function($scope, $mdToast, $mdDialog, $http, $localStorage, $interval) {
   $localStorage.beta = $localStorage.beta || false;
   $scope.androidIconSizes = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi'];
+  $scope.screenOrientations = ['unspecified', 'landscape', 'portrait'];
 
   function DialogController($scope, $mdDialog) {
     $scope.hide = function () {
@@ -366,6 +380,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     },
     android: {
       packageName: 'fallen.software.glassic',
+      screenOrientation: 'unspecified',
       offline: false,
       fullscreen: false
     },
@@ -513,6 +528,6 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     return zip.generate({type: 'blob'});
   }
 }]);
-    </script>
-  </body>
+  </script>
+</body>
 </html>
