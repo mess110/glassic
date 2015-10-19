@@ -137,6 +137,18 @@
               </div>
             </div>
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
+              <div flex=30 layout="column" layout-align="center center">
+              </div>
+              <div flex=17.5>
+                <md-input-container>
+                  <label>Screen Orientation</label>
+                  <md-select ng-model="config.android.screenOrientation">
+                    <md-option ng-repeat="orientation in screenOrientations" value="{{orientation}}">{{orientation}}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+            </div>
+            <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
               <div flex=30 layout="column" layout-align="center center" class="center-it">
               </div>
               <!-- NOTE: ng-repeat does not work due to fileread -->
@@ -186,18 +198,6 @@
               </div>
             </div>
           </div>
-          <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
-            <div flex=30 layout="column" layout-align="center center">
-            </div>
-            <div flex=17.5>
-              <md-input-container>
-                <label>Screen Orientation</label>
-                <md-select ng-model="config.android.screenOrientation">
-                  <md-option ng-repeat="orientation in screenOrientations" value="{{orientation}}">{{orientation}}</md-option>
-                </md-select>
-              </md-input-container>
-            </div>
-          </div>
 
           <md-divider ng-show="advanced && desktop"></md-divider>
           <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
@@ -217,11 +217,20 @@
               </md-input-container>
             </div>
             <div flex>
-              <md-checkbox ng-model="config.desktop.fullscreen" ng-disabled="false">
+              <md-checkbox ng-model="config.desktop.fullscreen" ng-disabled="config.desktop.resizable">
                 Fullscreen
               </md-checkbox>
             </div>
             <div flex>
+              <md-checkbox ng-model="config.desktop.resizable" ng-disabled="config.desktop.fullscreen">
+                Resizable
+              </md-checkbox>
+            </div>
+          </div>
+          <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
+            <div flex=30 layout="column" layout-align="center center">
+            </div>
+            <div flex=17.5>
               <md-button>
                 <label for="file-input-desktop" style="display: block;">
                   Icon
@@ -376,7 +385,8 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     desktop: {
       width: 800,
       height: 600,
-      fullscreen: false
+      fullscreen: false,
+      resizable: false
     },
     android: {
       packageName: 'fallen.software.glassic',
