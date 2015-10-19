@@ -4,7 +4,8 @@
   "desktop": {
     "width": 800,
     "height": 600,
-    "fullscreen": false
+    "fullscreen": false,
+    "resizable": false
   },
   "android": {
     "packageName": "fallen.software.coolbeans",

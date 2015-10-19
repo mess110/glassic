@@ -20,6 +20,7 @@ module.exports = class Utils
 
     assert.equal(typeof(config.desktop), 'object')
     assert.equal(typeof(config.desktop.fullscreen), 'boolean')
+    assert.equal(typeof(config.desktop.resizable), 'boolean')
     assert.equal(typeof(config.desktop.width), 'number')
     assert.equal(typeof(config.desktop.height), 'number')
 
@@ -48,6 +49,7 @@ module.exports = class Utils
       sed '-i', /\$\{desktop\.width\}/g, config.desktop.width, file
       sed '-i', /\$\{desktop\.height\}/g, config.desktop.height, file
       sed '-i', /\$\{desktop\.fullscreen\}/g, config.desktop.fullscreen.toString(), file
+      sed '-i', /\$\{desktop\.resizable\}/g, config.desktop.resizable.toString(), file
       sed '-i', /\$\{android\.packageName\}/g, config.android.packageName, file
       sed '-i', /\$\{android\.screenOrientation\}/g, config.android.screenOrientation, file
       sed '-i', /\$\{android\.fullscreen\}/g, config.android.fullscreen.toString(), file

@@ -83,6 +83,14 @@ describe 'Utils', ->
         @c.desktop.fullscreen = 'string'
         shouldHaveError(@c)
 
+      it 'requires desktop.resizable', ->
+        delete @c.desktop.resizable
+        shouldHaveError(@c)
+
+      it 'requires desktop.fullscreen to be boolean', ->
+        @c.desktop.resizable = 'string'
+        shouldHaveError(@c)
+
     describe 'android', ->
       it 'is a hash', ->
         @c.android = 'android'

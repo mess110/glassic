@@ -4,18 +4,19 @@
   "main": "index.html",
   "author": "",
   "window": {
-      "title": "${name}",
-      "icon": "favicon.png",
-      "toolbar": false,
-      "frame": true,
-      "width": ${desktop.width},
-      "height": ${desktop.height},
-      "position": "center",
-      "kiosk": ${desktop.fullscreen}
-    },
-    "webkit": {
-        "plugin": true
-      },
+    "title": "${name}",
+    "icon": "favicon.png",
+    "toolbar": false,
+    "frame": true,
+    "width": ${desktop.width},
+    "height": ${desktop.height},
+    "position": "center",
+    "kiosk": ${desktop.fullscreen},
+    "resizable": ${desktop.resizable}
+  },
+  "webkit": {
+    "plugin": true
+  },
   "dependencies": {
     "nw": "^0.12.3"
   }
