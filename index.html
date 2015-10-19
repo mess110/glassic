@@ -149,7 +149,7 @@
                     <img for="file-input-desktop" ng-src="{{androidIconmdpi}}" style="width: 64px; height: 64px"/>
                   </md-tooltip>
                 </md-button>
-                <input id="file-input-android-mdpi" fileread="androidIconmdpi" type="file">
+                <input id="file-input-android-mdpi" fileread="androidIconmdpi" type="file" accept="image/png">
               </div>
               <div flex>
                 <md-button>
@@ -160,7 +160,7 @@
                     <img for="file-input-desktop" ng-src="{{androidIconhdpi}}" style="width: 64px; height: 64px"/>
                   </md-tooltip>
                 </md-button>
-                <input id="file-input-android-hdpi" fileread="androidIconhdpi" type="file">
+                <input id="file-input-android-hdpi" fileread="androidIconhdpi" type="file" accept="image/png">
               </div>
               <div flex>
                 <md-button>
@@ -171,7 +171,7 @@
                     <img for="file-input-desktop" ng-src="{{androidIconxhdpi}}" style="width: 64px; height: 64px"/>
                   </md-tooltip>
                 </md-button>
-                <input id="file-input-android-xhdpi" fileread="androidIconxhdpi" type="file">
+                <input id="file-input-android-xhdpi" fileread="androidIconxhdpi" type="file" accept="image/png">
               </div>
               <div flex>
                 <md-button>
@@ -182,7 +182,7 @@
                     <img for="file-input-desktop" ng-src="{{androidIconxxhdpi}}" style="width: 64px; height: 64px"/>
                   </md-tooltip>
                 </md-button>
-                <input id="file-input-android-xxhdpi" fileread="androidIconxxhdpi" type="file">
+                <input id="file-input-android-xxhdpi" fileread="androidIconxxhdpi" type="file" accept="image/png">
               </div>
             </div>
 
@@ -217,7 +217,7 @@
                     <img for="file-input-desktop" ng-src="{{desktopIcon}}" style="width: 64px; height: 64px"/>
                   </md-tooltip>
                 </md-button>
-                <input id="file-input-desktop" fileread="desktopIcon" type="file">
+                <input id="file-input-desktop" fileread="desktopIcon" type="file" accept="image/png">
               </div>
             </div>
             <div layout="row" layout-sm="column" layout-wrap ng-show="advanced && desktop">
@@ -286,22 +286,31 @@ app.config(function($mdThemingProvider) {
     .accentPalette('deep-purple');
 });
 
-app.directive("fileread", [function () {
+app.directive("fileread", ['$mdToast', function ($mdToast) {
   return {
     scope: {
       fileread: "="
     },
-        link: function (scope, element, attributes) {
-          element.bind("change", function (changeEvent) {
-            var reader = new FileReader();
-                reader.onload = function (loadEvent) {
-                  scope.$apply(function () {
-                    scope.fileread = loadEvent.target.result;
-                  });
-                }
-                reader.readAsDataURL(changeEvent.target.files[0]);
-          });
+    link: function (scope, element, attributes) {
+      // TODO: extract to module
+      showToast = function (s) {
+        $mdToast.show($mdToast.simple().content(s).position('top right').hideDelay(3000));
+      };
+
+      element.bind("change", function (changeEvent) {
+        var reader = new FileReader();
+        reader.onload = function (loadEvent) {
+          if (loadEvent.target.result.split('/')[1].split(';')[0] === 'png') {
+            scope.$apply(function () {
+              scope.fileread = loadEvent.target.result;
+            });
+          } else {
+            showToast('png file required');
+          }
         }
+        reader.readAsDataURL(changeEvent.target.files[0]);
+      });
+    }
   }
 }]);
 
