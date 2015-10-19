@@ -139,13 +139,50 @@
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
               <div flex=30 layout="column" layout-align="center center" class="center-it">
               </div>
-              <div flex ng-repeat="androidIcon in androidIconSizes">
+              <!-- NOTE: ng-repeat does not work due to fileread -->
+              <div flex>
                 <md-button>
-                  <label for="file-input-android-{{androidIcon}}" style="display: block;">
-                    {{androidIcon}} Icon
+                  <label for="file-input-android-mdpi" style="display: block;">
+                    mdpi Icon
                   </label>
+                  <md-tooltip md-direction="bottom" ng-show="androidIconmdpi">
+                    <img for="file-input-desktop" ng-src="{{androidIconmdpi}}" style="width: 64px; height: 64px"/>
+                  </md-tooltip>
                 </md-button>
-                <input id="file-input-android-{{androidIcon}}" fileread="'androidIcon' + androidIcon" type="file">
+                <input id="file-input-android-mdpi" fileread="androidIconmdpi" type="file">
+              </div>
+              <div flex>
+                <md-button>
+                  <label for="file-input-android-hdpi" style="display: block;">
+                    hdpi Icon
+                  </label>
+                  <md-tooltip md-direction="bottom" ng-show="androidIconhdpi">
+                    <img for="file-input-desktop" ng-src="{{androidIconhdpi}}" style="width: 64px; height: 64px"/>
+                  </md-tooltip>
+                </md-button>
+                <input id="file-input-android-hdpi" fileread="androidIconhdpi" type="file">
+              </div>
+              <div flex>
+                <md-button>
+                  <label for="file-input-android-xhdpi" style="display: block;">
+                    xhdpi Icon
+                  </label>
+                  <md-tooltip md-direction="bottom" ng-show="androidIconxhdpi">
+                    <img for="file-input-desktop" ng-src="{{androidIconxhdpi}}" style="width: 64px; height: 64px"/>
+                  </md-tooltip>
+                </md-button>
+                <input id="file-input-android-xhdpi" fileread="androidIconxhdpi" type="file">
+              </div>
+              <div flex>
+                <md-button>
+                  <label for="file-input-android-xxhdpi" style="display: block;">
+                    xxhdpi Icon
+                  </label>
+                  <md-tooltip md-direction="bottom" ng-show="androidIconxxhdpi">
+                    <img for="file-input-desktop" ng-src="{{androidIconxxhdpi}}" style="width: 64px; height: 64px"/>
+                  </md-tooltip>
+                </md-button>
+                <input id="file-input-android-xxhdpi" fileread="androidIconxxhdpi" type="file">
               </div>
             </div>
 
@@ -176,6 +213,9 @@
                   <label for="file-input-desktop" style="display: block;">
                     Icon
                   </label>
+                  <md-tooltip md-direction="bottom" ng-show="desktopIcon">
+                    <img for="file-input-desktop" ng-src="{{desktopIcon}}" style="width: 64px; height: 64px"/>
+                  </md-tooltip>
                 </md-button>
                 <input id="file-input-desktop" fileread="desktopIcon" type="file">
               </div>
@@ -455,9 +495,9 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
 
     $scope.androidIconSizes.forEach(function(entry) {
       try {
-        zip.file(folderName + '/assets/' + entry + '.png', $scope['androidIcon' + androidIcon].split(',')[1], {base64: true});
+        zip.file(folderName + '/assets/' + entry + '.png', $scope['androidIcon' + entry].split(',')[1], {base64: true});
       } catch (TypeError) {
-        zip.file(folderName + '/assets/' + entry + '.png', defaultIcon, {base64: true});
+        zip.file(folderName + '/assets/favicon.png', defaultIcon, {base64: true});
       }
     });
 
