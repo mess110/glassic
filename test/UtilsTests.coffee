@@ -112,6 +112,18 @@ describe 'Utils', ->
         @c.android.packageName = 'asd.asd'
         shouldHaveError(@c)
 
+      it 'has android.windowSoftInputMode key', ->
+        delete @c.android.windowSoftInputMode
+        shouldHaveError(@c)
+
+      it 'requires android.windowSoftInputMode to be a string', ->
+        @c.android.windowSoftInputMode = {}
+        shouldHaveError(@c)
+
+      it 'requires android.screenOrientation to be a valid value', ->
+        @c.android.windowSoftInputMode = 'foo'
+        shouldHaveError(@c)
+
       it 'has android.screenOrientation key', ->
         delete @c.android.screenOrientation
         shouldHaveError(@c)

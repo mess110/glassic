@@ -19,7 +19,7 @@
         <activity
             android:configChanges="orientation|screenSize"
             android:name="${android.packageName}.ShowWebView"
-            android:windowSoftInputMode="adjustNothing"
+            android:windowSoftInputMode="${android.windowSoftInputMode}"
             android:label="@string/app_name"
             android:screenOrientation="${android.screenOrientation}" >
             <intent-filter>
