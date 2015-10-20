@@ -139,13 +139,23 @@
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
               <div flex=30 layout="column" layout-align="center center">
               </div>
-              <div flex=17.5>
+              <div flex>
                 <md-input-container>
-                  <label>Screen Orientation</label>
+                  <label>screen orientation</label>
                   <md-select ng-model="config.android.screenOrientation">
                     <md-option ng-repeat="orientation in screenOrientations" value="{{orientation}}">{{orientation}}</md-option>
                   </md-select>
                 </md-input-container>
+              </div>
+              <div flex>
+                <md-input-container>
+                  <label>window soft input mode</label>
+                  <md-select ng-model="config.android.windowSoftInputMode">
+                    <md-option ng-repeat="inputMode in windowSoftInputModes" value="{{inputMode}}">{{inputMode}}</md-option>
+                  </md-select>
+                </md-input-container>
+              </div>
+              <div flex=35>
               </div>
             </div>
             <div class='md-padding' layout="row" layout-sm="column" layout-wrap ng-show="advanced && android">
@@ -363,6 +373,9 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
   $localStorage.beta = $localStorage.beta || false;
   $scope.androidIconSizes = ['mdpi', 'hdpi', 'xhdpi', 'xxhdpi'];
   $scope.screenOrientations = ['unspecified', 'landscape', 'portrait'];
+  $scope.windowSoftInputModes = ['stateUnspecified', 'stateUnchanged', 'stateHidden',
+                                 'stateAlwaysHidden', 'stateVisible', 'stateAlwaysVisible',
+                                 'adjustUnspecified', 'adjustResize', 'adjustPan'];
 
   function DialogController($scope, $mdDialog) {
     $scope.hide = function () {
@@ -391,6 +404,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     android: {
       packageName: 'fallen.software.glassic',
       screenOrientation: 'unspecified',
+      windowSoftInputMode: 'stateUnspecified',
       offline: false,
       fullscreen: false
     },
