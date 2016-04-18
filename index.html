@@ -160,10 +160,10 @@
                         <div class="platform" ng-show="advanced && android">
                             <md-divider></md-divider>
                             <div class='md-padding' layout="row" layout-sm="column" layout-wrap>
-                                <div flex=30 layout="column" layout-align="center center" class="center-it">
+                                <div flex="30" layout="column" layout-align="center center" class="center-it">
                                     <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
                                 </div>
-                                <div flex=35 flex-sm=100>
+                                <div flex>
                                     <md-input-container flex>
                                         <label>package name</label>
                                         <input type="text" ng-required="true" ng-model="config.android.packageName" ng-disabled="false" java-package-name>
