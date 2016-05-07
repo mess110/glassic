@@ -64,7 +64,8 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     $scope.page = {
       loading: false,
       view: 'build',
-      progress: ''
+      progress: '',
+      estimatedDuration: undefined
     };
 
     $localStorage.beta = $localStorage.beta || false;
@@ -120,6 +121,12 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
         }
         $scope.config.android.packageName = "fallen.software." + newValue.toLowerCase().replace(/\W+/g, '');
     });
+
+  $scope.millisToMinutesAndSeconds = function (millis) {
+      var minutes = Math.floor(millis / 60000);
+      var seconds = ((millis % 60000) / 1000).toFixed(0);
+      return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
 
   $scope.build = function (ev) {
       $mdDialog.show({
@@ -195,7 +202,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
               $http.get('http://glassic-jenkins.at.struktu.ro:8080/queue/api/json').then(function (data) {
                   var arr = data.data.items;
                   $scope.buildQueue = arr
-                  $scope.page.progress = 'position in queue: ' + (arr.length)
+                  $scope.page.progress = 'waiting for other builds'
                   if (arr.length > 0) {
                       for (var i = 0, l = arr.length; i < l; i++) {
                           var foundItem = arr[i];
@@ -205,8 +212,12 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
                               var startInterval = $interval(function () {
                                   $http.get('http://glassic-jenkins.at.struktu.ro:8080/' + foundItem.url + '/api/json').then(function (data) {
                                       var result = data.data;
+                                      if (result.blocked == true && ('buildableStartMilliseconds' in result)) {
+                                          $scope.page.estimatedDuration = arr.length * 1000 * 60 * 2;
+                                      }
                                       if (result.blocked == false && ('executable' in result)) {
-                                          $interval.cancel(startInterval)
+                                          $interval.cancel(startInterval);
+                                          $scope.page.estimatedDuration = undefined;
                                           $scope.page.progress = 'starting build';
                                           var buildInterval  = $interval(function () {
                                               var jobUrl = result.executable.url + 'api/json';
@@ -214,11 +225,14 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
                                                   var status = data.data;
                                                   if (status.building == true) {
                                                       $scope.page.progress = 'building';
+                                                      if ($scope.page.estimatedDuration === undefined) {
+                                                        $scope.page.estimatedDuration = status.estimatedDuration;
+                                                      }
                                                   } else {
                                                       $interval.cancel(buildInterval);
                                                       $scope.page.progress = status.result;
-                                                      $scope.page.loading = false
-                                                      $scope.page.view = 'result'
+                                                      $scope.page.loading = false;
+                                                      $scope.page.view = 'result';
                                                   }
                                               }, function(error) {
                                                   console.log(error);
@@ -246,9 +260,9 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     });
   };
 
-  <!-- $timeout(function () { -->
-      <!-- $scope.cloudBuild(); -->
-  <!-- }) -->
+  // $timeout(function () {
+      // $scope.cloudBuild();
+  // })
 
   $scope.generate = function () {
       saveAs(zipFile(), $scope.config.name + '-glassic.zip');

@@ -80,6 +80,28 @@
             .platform {
                 padding-top: 30px;
             }
+
+            .results {
+                padding-top: 30px;
+                text-align: center;
+            }
+
+            .results > div > md-icon {
+                width: 48px;
+                height: 48px;
+            }
+
+            .results > div:nth-child(1) > md-icon > svg {
+                fill: rgb(63,81,181);
+            }
+
+            .results > div:nth-child(2) > md-icon > svg {
+                fill: #F44336;
+            }
+
+            .building > p > span {
+                color: #9E9E9E;
+            }
         </style>
     </head>
     <body ng-controller="AppCtrl" ng-cloak>
@@ -90,20 +112,6 @@
             <md-card>
                 <md-card-content>
                     <h2 class="md-title">glassic <span>wizard</span></h2>
-
-                    <div layout="column" layout-align="center center" ng-show="page.view == 'building'">
-                        <div class="spinner" ng-show="page.loading"></div>
-                        <p>{{ page.progress }}</p>
-                    </div>
-
-                    <div layout="column" layout-align="center center" ng-show="page.view == 'result'">
-                        <div ng-show="page.progress == 'SUCCESS'">
-                            <p>The build will be emailed to you shortly.</p>
-                        </div>
-                        <div ng-show="page.progress != 'SUCCESS'">
-                            <p>There was an error with your build.</p>
-                        </div>
-                    </div>
 
                     <form name="myForm" ng-show="page.view == 'build'">
                         <div>
@@ -331,6 +339,25 @@
                         </md-content>
 
                     </form>
+
+                    <div layout="column" layout-align="center center" class="building" ng-show="page.view == 'building'">
+                        <div class="spinner" ng-show="page.loading"></div>
+                        <p>
+                            {{ page.progress }}
+                            <span ng-show="page.estimatedDuration">(eta {{ millisToMinutesAndSeconds(page.estimatedDuration) }} minutes)</span>
+                        </p>
+                    </div>
+
+                    <div layout="column" layout-align="center center" ng-show="page.view == 'result'" class="results">
+                        <div ng-show="page.progress == 'SUCCESS'">
+                            <md-icon md-svg-src="ic_done_48px.svg" aria-label="android"></md-icon>
+                            <p>The build will be emailed to you shortly.</p>
+                        </div>
+                        <div ng-show="page.progress != 'SUCCESS'">
+                            <md-icon md-svg-src="ic_report_48px.svg" aria-label="android"></md-icon>
+                            <p>There was an error with your build.</p>
+                        </div>
+                    </div>
                 </md-card-content>
 
                 <div class="md-actions" layout="row" layout-align="end center" ng-show="page.view == 'result'">
