@@ -12,7 +12,7 @@
     "screenOrientation": "unspecified",
     "windowSoftInputMode": "stateUnspecified",
     "offline": false,
-    "offlineRepo": "git@github.com:lelylan/betterspecs.git#master",
+    "offlineRepo": "https://github.com/mess110/glassic#offline-html",
     "fullscreen": false
   },
   "ios": {
