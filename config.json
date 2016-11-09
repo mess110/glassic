@@ -12,7 +12,7 @@
     "screenOrientation": "unspecified",
     "windowSoftInputMode": "stateUnspecified",
     "offline": false,
-    "offlineRepo": "https://github.com/mess110/glassic#offline-html",
+    "offlineRepo": "git@github.com:mess110/glassic.git#offline-html",
     "fullscreen": false
   },
   "ios": {
