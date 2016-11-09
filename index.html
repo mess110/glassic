@@ -200,7 +200,7 @@
                                         <input type="text" ng-required="config.android.offline" ng-model="config.android.offlineRepo" ng-disabled="!config.android.offline">
                                     </md-input-container>
                                     <md-tooltip md-direction="bottom">
-                                        Branch with '#name' after url
+                                        https://github.com/mess110/glassic.git#offline-html
                                     </md-tooltip>
                                 </div>
                             </div>
@@ -292,6 +292,10 @@
                                         <label>height</label>
                                         <input type="number" ng-required="true" ng-model="config.desktop.height" ng-disabled="config.desktop.fullscreen">
                                     </md-input-container>
+                                </div>
+                            </div>
+                            <div class='md-padding' layout="row" layout-sm="column" layout-wrap>
+                                <div flex=30 layout="column" layout-align="center center" class="center-it">
                                 </div>
                                 <div flex>
                                     <md-checkbox ng-model="config.desktop.fullscreen" ng-disabled="config.desktop.resizable">
