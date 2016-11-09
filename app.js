@@ -91,23 +91,24 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
     }
 
     $scope.config = {
-        name: 'Glassic Reddit',
-    url: 'https://m.reddit.com/',
-    desktop: {
-        width: 800,
+      name: 'Glassic Reddit',
+      url: 'https://m.reddit.com/',
+      desktop: {
+      width: 800,
       height: 600,
       fullscreen: false,
       resizable: false
     },
     android: {
-        packageName: 'fallen.software.glassicreddit',
+      packageName: 'fallen.software.glassicreddit',
       screenOrientation: 'unspecified',
       windowSoftInputMode: 'stateUnspecified',
       offline: false,
+      offlineRepo: '',
       fullscreen: false
     },
     ios: {
-        fullscreen: false
+      fullscreen: false
     }
     };
 
@@ -182,7 +183,7 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
       jsonParams = {
           parameter: [
               { name: 'generated.zip', file: 'file0' },
-            { name: 'guid', value: guid }
+              { name: 'guid', value: guid }
           ]
       };
       fd.append('json', JSON.stringify(jsonParams));

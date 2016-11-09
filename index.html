@@ -172,15 +172,19 @@
                                     <md-icon md-svg-src="ic_android_48px.svg" aria-label="android"></md-icon>
                                 </div>
                                 <div flex>
+                                    <md-checkbox ng-model="config.android.fullscreen" ng-disabled="false">
+                                        Fullscreen
+                                    </md-checkbox>
+                                </div>
+                                <div flex>
                                     <md-input-container flex>
                                         <label>package name</label>
                                         <input type="text" ng-required="true" ng-model="config.android.packageName" ng-disabled="false" java-package-name>
                                     </md-input-container>
                                 </div>
-                                <div flex>
-                                    <md-checkbox ng-model="config.android.fullscreen" ng-disabled="false">
-                                        Fullscreen
-                                    </md-checkbox>
+                            </div>
+                            <div class='md-padding' layout="row" layout-sm="column" layout-wrap>
+                                <div flex=30 layout="column" layout-align="center center">
                                 </div>
                                 <div flex>
                                     <md-checkbox ng-model="config.android.offline" ng-disabled="false">
@@ -188,6 +192,15 @@
                                     </md-checkbox>
                                     <md-tooltip md-direction="bottom">
                                         Loads 'index.html' from android assets folder.
+                                    </md-tooltip>
+                                </div>
+                                <div flex>
+                                    <md-input-container flex>
+                                        <label>offline repo</label>
+                                        <input type="text" ng-required="config.android.offline" ng-model="config.android.offlineRepo" ng-disabled="!config.android.offline">
+                                    </md-input-container>
+                                    <md-tooltip md-direction="bottom">
+                                        Branch with '#name' after url
                                     </md-tooltip>
                                 </div>
                             </div>
@@ -209,8 +222,6 @@
                                             <md-option ng-repeat="inputMode in windowSoftInputModes" value="{{inputMode}}">{{inputMode}}</md-option>
                                         </md-select>
                                     </md-input-container>
-                                </div>
-                                <div flex=35>
                                 </div>
                             </div>
                             <div class='md-padding' layout="row" layout-sm="column" layout-wrap>
