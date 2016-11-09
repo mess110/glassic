@@ -158,6 +158,11 @@ describe 'Utils', ->
         @c.android.offline = 'string'
         shouldHaveError(@c)
 
+      it 'requires android.offlineRepo to be string', ->
+        @c.android.offline = true
+        @c.android.offlineRepo = true
+        shouldHaveError(@c)
+
       it 'requires android.fullscreen', ->
         delete @c.android.fullscreen
         shouldHaveError(@c)

@@ -11,8 +11,6 @@ module.exports = class Utils
     config.android.packageName.replace(/\./g, '/')
 
   @validateConfig: (config) ->
-    echo 'Info: Validating config'
-
     assert.equal(typeof(config.name), 'string')
     assert.equal(typeof(config.url), 'string')
 
