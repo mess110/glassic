@@ -97,13 +97,14 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
       width: 800,
       height: 600,
       fullscreen: false,
-      offline: false,
       resizable: false
     },
     android: {
       packageName: 'fallen.software.glassicreddit',
       screenOrientation: 'unspecified',
       windowSoftInputMode: 'stateUnspecified',
+      offline: false,
+      offlineRepo: '',
       fullscreen: false
     },
     ios: {
