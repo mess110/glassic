@@ -27,6 +27,7 @@ javaSrcFiles = [
 ]
 Utils.moveSrcToPackageFolder('templates/android', '../..', javaSrcFiles, config)
 Utils.moveAndroidIcons()
+Utils.cloneOfflineRepo('templates/android', '../..', config)
 
 ios7Files = [
   'Demo/Classes/ViewController.m'

@@ -43,7 +43,6 @@ Here is an overview of what the commands do.
 ## TODO
 
 - web
-  - show build queue and status
 - build server
   - https
 - package apps

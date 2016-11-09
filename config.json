@@ -12,6 +12,7 @@
     "screenOrientation": "unspecified",
     "windowSoftInputMode": "stateUnspecified",
     "offline": false,
+    "offlineRepo": "git@github.com:lelylan/betterspecs.git#master",
     "fullscreen": false
   },
   "ios": {

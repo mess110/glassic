@@ -11,6 +11,8 @@ module.exports = class Utils
     config.android.packageName.replace(/\./g, '/')
 
   @validateConfig: (config) ->
+    echo 'Info: Validating config'
+
     assert.equal(typeof(config.name), 'string')
     assert.equal(typeof(config.url), 'string')
 
@@ -34,6 +36,8 @@ module.exports = class Utils
                      'stateAlwaysHidden', 'stateVisible',  'stateAlwaysVisible',
                      'adjustUnspecified', 'adjustResize', 'adjustPan'].indexOf(config.android.windowSoftInputMode), -1)
     assert.equal(typeof(config.android.offline), 'boolean')
+    if config.android.offline == true
+      assert.equal(typeof(config.android.offlineRepo), 'string')
 
     assert.equal(config.android.packageName.split('.').length >= 3, true)
     tmpPackageName = config.android.packageName.replace(/\W+\./g)
@@ -85,5 +89,36 @@ module.exports = class Utils
 
   @checkoutTemplates: ->
     if (exec('git checkout templates/').code != 0)
-      echo('Error: Git checkout failed')
+      echo 'Error: Git checkout failed'
       exit(1)
+
+  @cloneOfflineRepo: (path, returnPath, config) ->
+    unless config.android.offline
+      return
+
+    cd path
+    cd 'app/src/main/'
+
+    rm '-rf', 'assets/'
+
+    repoUrl = config.android.offlineRepo
+    if repoUrl.includes('#')
+      splita = repoUrl.split('#')
+      repoUrl = splita[0]
+      branchName = splita[1]
+
+    echo "Repo url: #{repoUrl}"
+    if (exec("git clone #{repoUrl} assets").code != 0)
+      echo 'Error: Git clone offline repo failed'
+      exit(1)
+
+    if branchName?
+      echo "Repo branch: #{branchName}"
+      cd 'assets/'
+      if (exec("git checkout #{branchName}").code != 0)
+        echo "Error: Could not find branch: #{branchName}"
+        exit(1)
+      cd '..'
+
+    cd '../../..'
+    cd returnPath
