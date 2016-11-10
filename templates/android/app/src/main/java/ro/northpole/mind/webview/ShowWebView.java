@@ -1,5 +1,6 @@
 package ${android.packageName};
 
+import android.annotation.TargetApi;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -43,6 +44,12 @@ public class ShowWebView extends Activity {
         }
     }
 
+    @TargetApi(16)
+    private WebSettings initHighSettings(WebSettings webSettings) {
+        webSettings.setAllowUniversalAccessFromFileURLs(true);
+        return webSettings;
+    }
+
     private void startWebView(String url) {
 
         WebSettings webSettings = webView.getSettings();
@@ -52,6 +59,7 @@ public class ShowWebView extends Activity {
 
         webSettings.setJavaScriptEnabled(true);
         webSettings.setDomStorageEnabled(true);
+        initHighSettings(webSettings);
 
         // webSettings.setLoadWithOverviewMode(true);
         // webSettings.setUseWideViewPort(true);
