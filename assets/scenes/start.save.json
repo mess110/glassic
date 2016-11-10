@@ -1,0 +1,90 @@
+{
+  "id": "start",
+  "engine": {
+    "camera": 0
+  },
+  "assets": [
+    {
+      "type": "model",
+      "libPath": "/home/kiki/Sync/blender/models/bear/bear_all.json",
+      "destPath": "assets/bear_all.json"
+    },
+    {
+      "type": "texture",
+      "libPath": "workspace/lib/textures/seamless_grass.jpg",
+      "destPath": "assets/seamless_grass.jpg"
+    }
+  ],
+  "cameras": [
+    {
+      "type": "PerspectiveCamera",
+      "view_angle": 45,
+      "near": 1,
+      "far": 100000,
+      "id": "camera",
+      "position": {
+        "z": 20,
+        "y": 2
+      }
+    }
+  ],
+  "items": [
+    {
+      "type": "cube",
+      "position": {
+        "z": -10,
+        "y": null,
+        "x": 10
+      }
+    },
+    {
+      "type": "model",
+      "key": "bear_all",
+      "id": "bear"
+    },
+    {
+      "type": "ambientLight",
+      "color": "#404040"
+    },
+    {
+      "type": "pointLight",
+      "color": "#ffffff",
+      "intensity": 1,
+      "distance": 100,
+      "decay": 1,
+      "position": {
+        "y": 40
+      }
+    },
+    {
+      "type": "plane",
+      "map": "seamless_grass",
+      "width": 20,
+      "height": 20,
+      "rotation": {
+        "y": null,
+        "z": null,
+        "x": 1.57
+      },
+      "wSegments": 10,
+      "hSegments": 10
+    },
+    {
+      "type": "ambientLight",
+      "color": "#404040"
+    }
+  ],
+  "scripts": [
+    {
+      "actions": [
+        {
+          "target": "bear",
+          "animate": {
+            "name": 1,
+            "loop": true
+          }
+        }
+      ]
+    }
+  ]
+}

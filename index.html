@@ -1,50 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
     <head>
-        <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-        <meta content="utf-8" http-equiv="encoding">
-        <meta name="viewport" content="initial-scale=1" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 
-        <title>glassic offline app</title>
+        <title>project</title>
 
         <style type="text/css" media="all">
             html, body {
             }
 
-            md-card {
-                max-width: 1200px;
-                margin-left: auto;
-                margin-right: auto;
-            }
-
-            md-input-container {
-                padding-bottom: 2px;
-            }
-
-            .center-it {
-                margin: auto;
-                position: relative;
-                left: 0;
-                right: 0;
-            }
-
-            .right-padding-10 {
-                padding-right: 10px;
-            }
-
-            h2 span {
-                color: rgba(0,0,0,0.54);
+            div {
+                padding: 20px;
             }
         </style>
     </head>
-    <body>
-        <md-content class="md-padding">
-            <md-card>
-                <md-card-content>
-                    <h2 class="md-title">glassic <span>offline app</span></h2>
-                    <p>does nothing</p>
-                </md-card-content>
-            </md-card>
-        </md-content>
+    <body ng-controller="MainController">
+        <div>
+            <button ng-click="click()">click me</button>
+            <span>{{ count }}</span>
+        </div>
+
+        <div>
+            <a ng-href="game.html">webgl test</a>
+        </div>
+
+        <div>
+            <a href="#" ng-click="yell()">alert test</a>
+        </div>
+
+        <script src="js/angular.min.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
