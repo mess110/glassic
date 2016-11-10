@@ -102,6 +102,11 @@
             .building > p > span {
                 color: #9E9E9E;
             }
+
+            pre {
+                width: 100%;
+                overflow: hidden;
+            }
         </style>
     </head>
     <body ng-controller="AppCtrl" ng-cloak>
@@ -372,6 +377,10 @@
                             <md-icon md-svg-src="ic_report_48px.svg" aria-label="android"></md-icon>
                             <p>There was an error with your build.</p>
                         </div>
+                    </div>
+
+                    <div layout="column" layout-align="center center" ng-show="page.view == 'result' || page.view == 'building'">
+                        <pre>{{ progressText }}</pre>
                     </div>
                 </md-card-content>
 

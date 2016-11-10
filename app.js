@@ -223,6 +223,10 @@ app.controller('AppCtrl', ['$scope', '$mdToast', '$mdDialog', '$http', '$localSt
                                           var buildInterval  = $interval(function () {
                                               var jobUrl = result.executable.url + 'api/json';
                                               $http.get(jobUrl).then(function (data) {
+                                                  jobId = data.data.id;
+                                                  $http.get("http://glassic.northpole.ro:8080/job/build-android/" + jobId + "/logText/progressiveText?start=0").then(function (progress) {
+                                                    $scope.progressText = progress.data
+                                                  });
                                                   var status = data.data;
                                                   if (status.building == true) {
                                                       $scope.page.progress = 'building';
